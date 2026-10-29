@@ -1,0 +1,2779 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SJC Tree of Wishes | Giáng Sinh SJC - USSH 2026</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #FBF9F1;
+            color: #2D3748;
+        }
+
+        /* SJC Christmas visual refresh: editorial, warm, illustrated */
+        .tree-card {
+            background: radial-gradient(ellipse at 50% 38%, rgba(31, 92, 58, .34), transparent 54%),
+                linear-gradient(160deg, #142a24 0%, #0d1b19 58%, #101b24 100%);
+            border: 1px solid rgba(230, 198, 126, .38);
+        }
+
+        .tree-stage {
+            position: relative;
+            width: min(100%, 390px);
+            height: 410px;
+            isolation: isolate;
+        }
+
+        .tree-art {
+            position: absolute;
+            inset: 14px 0 0;
+            width: 100%;
+            height: 390px;
+            overflow: visible;
+            filter: drop-shadow(0 18px 15px rgba(0, 0, 0, .2));
+        }
+
+        .tree-glow {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            left: 50%;
+            top: 75px;
+            transform: translateX(-50%);
+            border-radius: 50%;
+            background: rgba(246, 198, 93, .08);
+            filter: blur(24px);
+        }
+
+        .tree-ornament {
+            position: absolute;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 27px;
+            height: 27px;
+            border: 1px solid rgba(255, 255, 255, .75);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: inset -4px -5px 7px rgba(0, 0, 0, .22), 0 3px 9px rgba(0, 0, 0, .24);
+            transition: transform .2s ease, filter .2s ease;
+        }
+
+        .tree-ornament:hover {
+            transform: scale(1.22) rotate(8deg);
+            filter: brightness(1.12);
+        }
+
+        .tree-ornament:focus-visible {
+            outline: 3px solid #fff4bd;
+            outline-offset: 3px;
+        }
+
+        .tree-ornament::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: 10px;
+            width: 5px;
+            height: 4px;
+            border: 1px solid #e6c67e;
+            border-bottom: 0;
+            border-radius: 3px 3px 0 0;
+        }
+
+        .tree-ornament.gold {
+            background: radial-gradient(circle at 30% 25%, #fff4bd, #e8b94f 45%, #a86d20);
+        }
+
+        .tree-ornament.red {
+            background: radial-gradient(circle at 30% 25%, #ffb3a7, #c91c36 48%, #721629);
+        }
+
+        .tree-ornament.blue {
+            background: radial-gradient(circle at 30% 25%, #d6f4ff, #5ca9c0 48%, #1c5267);
+        }
+
+        .tree-ornament.pink {
+            background: radial-gradient(circle at 30% 25%, #ffe2e9, #d77b98 48%, #813b5b);
+        }
+
+        .tree-ornament.gift {
+            background: linear-gradient(90deg, #c91c36 0 42%, #f4d58b 42% 58%, #c91c36 58%);
+            border-radius: 5px;
+        }
+
+        .tree-lights {
+            animation: lights-glow 2.8s ease-in-out infinite alternate;
+        }
+
+        @keyframes lights-glow {
+            from {
+                opacity: .62;
+            }
+
+            to {
+                opacity: 1;
+                filter: drop-shadow(0 0 5px rgba(255, 216, 117, .9));
+            }
+        }
+
+        .tree-topper {
+            filter: drop-shadow(0 0 11px rgba(255, 213, 112, .75));
+            animation: topper-pulse 3s ease-in-out infinite;
+            transform-origin: center;
+        }
+
+        @keyframes topper-pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08);
+            }
+        }
+
+        /* ===== Nâng cấp cây thông ===== */
+        .tree-card {
+            background: radial-gradient(ellipse at 50% 40%, rgba(31, 92, 58, .38), transparent 55%), radial-gradient(ellipse at 50% 110%, rgba(230, 198, 126, .18), transparent 50%), linear-gradient(170deg, #0f2320 0%, #0b1817 55%, #0d1622 100%);
+        }
+
+        .sky-star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            background: #fff6d6;
+            animation: star-twinkle 3s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes star-twinkle {
+
+            0%,
+            100% {
+                opacity: .15;
+                transform: scale(.8);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.4);
+            }
+        }
+
+        .sky-moon {
+            position: absolute;
+            top: 22px;
+            right: 26px;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #fffbe6, #f1dca0 60%, #c9ad68);
+            box-shadow: 0 0 30px 6px rgba(255, 236, 170, .25);
+            pointer-events: none;
+        }
+
+        .sky-moon::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            top: 20px;
+            left: 10px;
+            border-radius: 50%;
+            background: rgba(180, 150, 80, .25);
+            box-shadow: 12px -9px 0 -2px rgba(180, 150, 80, .2);
+        }
+
+        .card-snow {
+            position: absolute;
+            top: -10px;
+            border-radius: 50%;
+            background: #fff;
+            opacity: .8;
+            pointer-events: none;
+            animation: card-snowfall linear infinite;
+        }
+
+        @keyframes card-snowfall {
+            to {
+                transform: translateY(560px) translateX(20px);
+                opacity: .1;
+            }
+        }
+
+        .snow-ground {
+            position: absolute;
+            left: -10%;
+            right: -10%;
+            bottom: -6px;
+            height: 70px;
+            background: radial-gradient(ellipse at 50% 100%, rgba(255, 253, 243, .22), rgba(255, 253, 243, .06) 55%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .tree-bulb {
+            transition: fill .4s ease, opacity .4s ease;
+            animation: bulb-twinkle 1.6s ease-in-out infinite alternate;
+        }
+
+        @keyframes bulb-twinkle {
+            from {
+                opacity: .45;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .tree-stage.theme-warm .tree-bulb {
+            fill: #ffe39a;
+            filter: drop-shadow(0 0 4px #ffd36b);
+        }
+
+        .tree-stage.theme-rainbow .tree-bulb:nth-child(4n+1) {
+            fill: #ff5a6e;
+            filter: drop-shadow(0 0 4px #ff5a6e);
+        }
+
+        .tree-stage.theme-rainbow .tree-bulb:nth-child(4n+2) {
+            fill: #ffd65a;
+            filter: drop-shadow(0 0 4px #ffd65a);
+        }
+
+        .tree-stage.theme-rainbow .tree-bulb:nth-child(4n+3) {
+            fill: #6fe0ff;
+            filter: drop-shadow(0 0 4px #6fe0ff);
+        }
+
+        .tree-stage.theme-rainbow .tree-bulb:nth-child(4n+4) {
+            fill: #9dff8a;
+            filter: drop-shadow(0 0 4px #9dff8a);
+        }
+
+        .tree-stage.theme-ice .tree-bulb {
+            fill: #dff6ff;
+            filter: drop-shadow(0 0 5px #9fdcff);
+        }
+
+        .tree-stage.lights-off .tree-bulb,
+        .tree-stage.lights-off .tree-lights {
+            animation: none;
+            opacity: .18;
+            filter: none;
+        }
+
+        .tree-stage.lights-off .tree-glow {
+            opacity: .2;
+        }
+
+        .tree-stage.lights-off .tree-topper {
+            animation: none;
+            filter: none;
+            opacity: .7;
+        }
+
+        .tree-ornament {
+            transform-origin: 50% -6px;
+        }
+
+        .tree-ornament.emoji {
+            background: transparent;
+            border: 0;
+            box-shadow: none;
+            font-size: 21px;
+            line-height: 1;
+            filter: drop-shadow(0 3px 4px rgba(0, 0, 0, .4));
+        }
+
+        .tree-ornament.emoji::before {
+            left: 50%;
+            transform: translateX(-50%);
+            top: -5px;
+        }
+
+        .tree-ornament.silver {
+            background: radial-gradient(circle at 30% 25%, #ffffff, #c9d3dc 48%, #6f7c88);
+        }
+
+        .tree-ornament.is-new {
+            animation: ornament-drop .9s cubic-bezier(.3, 1.6, .5, 1) both;
+        }
+
+        @keyframes ornament-drop {
+            0% {
+                transform: translateY(-140px) scale(.4);
+                opacity: 0;
+            }
+
+            70% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: none;
+                opacity: 1;
+            }
+        }
+
+        .tree-stage.shaking .tree-art {
+            animation: tree-wobble .9s ease-in-out;
+            transform-origin: 50% 95%;
+        }
+
+        .tree-stage.shaking .tree-ornament {
+            animation: ornament-swing .9s ease-in-out;
+        }
+
+        @keyframes tree-wobble {
+
+            0%,
+            100% {
+                transform: rotate(0);
+            }
+
+            20% {
+                transform: rotate(-2.5deg);
+            }
+
+            45% {
+                transform: rotate(2deg);
+            }
+
+            70% {
+                transform: rotate(-1deg);
+            }
+        }
+
+        @keyframes ornament-swing {
+
+            0%,
+            100% {
+                transform: rotate(0);
+            }
+
+            20% {
+                transform: rotate(18deg);
+            }
+
+            45% {
+                transform: rotate(-14deg);
+            }
+
+            70% {
+                transform: rotate(7deg);
+            }
+        }
+
+        .ornament-tip {
+            position: absolute;
+            z-index: 30;
+            pointer-events: none;
+            transform: translate(-50%, -120%);
+            background: #fffaf0;
+            color: #7a1a1a;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 9px;
+            border-radius: 999px;
+            white-space: nowrap;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, .3);
+            opacity: 0;
+            transition: opacity .15s;
+        }
+
+        .ornament-tip.show {
+            opacity: 1;
+        }
+
+        .tree-ctrl {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #fdf1cf;
+            background: rgba(255, 255, 255, .08);
+            border: 1px solid rgba(230, 198, 126, .35);
+            padding: 6px 10px;
+            border-radius: 999px;
+            transition: background .2s, transform .2s;
+        }
+
+        .tree-ctrl:hover {
+            background: rgba(230, 198, 126, .22);
+            transform: translateY(-1px);
+        }
+
+        .tree-ctrl.active {
+            background: rgba(230, 198, 126, .3);
+        }
+
+        .confetti-bit {
+            position: absolute;
+            z-index: 40;
+            width: 7px;
+            height: 11px;
+            border-radius: 2px;
+            pointer-events: none;
+            animation: confetti-fall 1.6s ease-out forwards;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translate(0, 0) rotate(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(var(--dx), var(--dy)) rotate(var(--rot));
+                opacity: 0;
+            }
+        }
+
+        .ornament-option {
+            cursor: pointer;
+            border: 1.5px solid #e2d9c5;
+            background: #fff;
+            border-radius: 14px;
+            padding: 8px 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            font-size: 10.5px;
+            font-weight: 600;
+            color: #57534e;
+            transition: all .2s;
+        }
+
+        .ornament-option:hover {
+            border-color: #e6c67e;
+            transform: translateY(-2px);
+        }
+
+        .ornament-option input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .ornament-option:has(input:checked) {
+            border-color: #C91C1C;
+            background: #fff3f0;
+            color: #C91C1C;
+            box-shadow: 0 4px 12px rgba(201, 28, 28, .15);
+        }
+
+        .ornament-option .swatch {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        :root {
+            --orn-red: radial-gradient(circle at 30% 25%, #ffb3a7, #c91c36 48%, #721629);
+            --orn-gold: radial-gradient(circle at 30% 25%, #fff4bd, #e8b94f 45%, #a86d20);
+            --orn-blue: radial-gradient(circle at 30% 25%, #d6f4ff, #5ca9c0 48%, #1c5267);
+            --orn-pink: radial-gradient(circle at 30% 25%, #ffe2e9, #d77b98 48%, #813b5b);
+            --orn-silver: radial-gradient(circle at 30% 25%, #ffffff, #c9d3dc 48%, #6f7c88);
+        }
+
+        .modal-ornament {
+            font-size: 44px;
+            line-height: 1;
+            display: inline-block;
+            animation: gentle-bounce 2s ease-in-out infinite;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .tree-topper,
+            .tree-lights,
+            .ornament-animate,
+            .tree-bulb,
+            .sky-star,
+            .card-snow,
+            .modal-ornament {
+                animation: none !important;
+            }
+        }
+
+        .side-deco {
+            position: fixed;
+            top: 0;
+            height: 100vh;
+            width: auto;
+            z-index: 0;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .side-deco.left {
+            left: 0;
+        }
+
+        .side-deco.right {
+            right: 0;
+        }
+
+        .hero-corner {
+            display: none;
+            position: absolute;
+            top: 0;
+            width: 110px;
+            height: 240px;
+            object-fit: cover;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hero-corner.left {
+            left: 0;
+            object-position: left top;
+        }
+
+        .hero-corner.right {
+            right: 0;
+            object-position: right top;
+        }
+
+        @media (max-width: 1024px) {
+            .side-deco {
+                display: none;
+            }
+
+            .hero-corner {
+                display: block;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .hero-corner {
+                display: none;
+            }
+        }
+
+        .font-script {
+            font-family: 'Playfair Display', serif;
+        }
+
+        @keyframes snowfall {
+            0% {
+                transform: translateY(-10vh) translateX(0);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(100vh) translateX(15px);
+                opacity: 0.1;
+            }
+        }
+
+        .snowflake {
+            position: absolute;
+            top: -20px;
+            background-color: #A0AEC0;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+
+        }
+
+        .vintage-card {
+            background: #FFFFFF;
+            border: 2px solid #E2D9C5;
+            box-shadow: 0 10px 30px rgba(180, 160, 130, 0.15);
+        }
+
+        @keyframes gentle-bounce {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-6px) rotate(3deg);
+            }
+        }
+
+        .ornament-animate {
+            animation: gentle-bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes spin-slow {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .cassette-wheel {
+            animation: spin-slow 4s linear infinite;
+            animation-play-state: paused;
+        }
+
+        .playing .cassette-wheel {
+            animation-play-state: running;
+        }
+
+        /* Hiệu ứng logo SJC phát sáng trên đỉnh cây */
+        @keyframes glow-pulse {
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 8px rgba(250, 204, 21, 0.8));
+            }
+
+            50% {
+                filter: drop-shadow(0 0 20px rgba(250, 204, 21, 1));
+            }
+        }
+
+        .sjc-star-glow {
+            animation: glow-pulse 2s infinite;
+        }
+    </style>
+</head>
+
+<body class="relative overflow-x-hidden selection:bg-red-600 selection:text-white pb-28">
+
+    <!-- Tuyết rơi background -->
+    <img src="deco-left.png" alt="" aria-hidden="true" class="side-deco left">
+    <img src="deco-right.png" alt="" aria-hidden="true" class="side-deco right">
+    <div id="snow-container" class="absolute inset-0 pointer-events-none overflow-hidden h-full w-full z-0"></div>
+
+    <!-- NAVBAR -->
+    <!-- NAVBAR -->
+    <nav
+        class="relative z-30 w-full py-4 px-6 md:px-12 flex justify-between items-center max-w-7xl mx-auto border-b border-[#E8E2CD] bg-[#FBF9F1]/80 backdrop-blur-md sticky top-0">
+        <div class="flex items-center gap-3 cursor-pointer">
+            <img src="ussh-logo.png" alt="Logo USSH" class="w-10 h-10 object-contain">
+            <div class="h-5 w-[1px] bg-stone-300"></div>
+            <img src="sjc-logo.png" alt="Logo SJC" class="h-10 object-contain">
+        </div>
+
+        <!-- Cập nhật thêm "Rạp Chiếu Phim" vào danh mục -->
+        <div class="hidden md:flex gap-6 font-medium text-stone-700 text-sm">
+            <a href="#tree-section" class="hover:text-red-600 transition-colors">🎄 Cây Thông</a>
+            <a href="#forest-section" class="hover:text-red-600 transition-colors">🌲 Khu Rừng Giáng Sinh</a>
+            <a href="#cinema-section" class="hover:text-red-600 transition-colors">🎬 Rạp Chiếu Phim</a>
+            <a href="#gift-box" class="hover:text-red-600 transition-colors">🎁 Hộp Quà</a>
+            <a href="#workshop-section" class="hover:text-red-600 transition-colors">✂️ Workshop</a>
+            <a href="#map-section" class="hover:text-red-600 transition-colors">🗺️ Sơ Đồ USSH</a>
+        </div>
+
+        <a href="#tree-section"
+            class="bg-[#C91C1C] hover:bg-red-700 text-white px-4 py-2 rounded-full font-semibold text-xs tracking-wide transition-all shadow-md">
+            Create My Tree →
+        </a>
+    </nav>
+
+    <!-- HERO SECTION & SJC TREE OF WISHES -->
+    <section id="tree-section" class="relative z-10 max-w-6xl mx-auto px-6 py-12">
+        <img src="deco-left.png" alt="" aria-hidden="true" class="hero-corner left">
+        <img src="deco-right.png" alt="" aria-hidden="true" class="hero-corner right">
+        <div class="relative z-10 text-center max-w-2xl mx-auto mb-10">
+            <span class="text-[#C91C1C] font-bold text-xs tracking-widest uppercase bg-red-100 px-3 py-1 rounded-full">
+                SJC Christmas Identity 2026
+            </span>
+            <h1 class="text-4xl md:text-6xl font-bold text-[#C91C1C] font-script mt-3">
+                SJC Tree of Wishes
+            </h1>
+            <p class="text-stone-700 text-base md:text-lg font-medium mt-1">
+                One tree. Hundreds of wishes. One Christmas together.
+            </p>
+            <p class="text-stone-500 text-xs md:text-sm mt-2 italic">
+                “Your friends are waiting to leave a wish.”
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <!-- CÂY THÔNG TƯƠNG TÁC (COLRMYTREE STYLE) -->
+            <div
+                class="lg:col-span-7 tree-card rounded-3xl p-6 md:p-8 text-white relative min-h-[520px] flex flex-col items-center justify-between shadow-2xl overflow-hidden">
+                <div
+                    class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-amber-500/10 via-transparent to-transparent pointer-events-none">
+                </div>
+
+                <div class="sky-moon"></div>
+                <div id="card-sky" class="absolute inset-0 pointer-events-none overflow-hidden"></div>
+                <div class="snow-ground"></div>
+                <!-- Chủ nhân cây thông -->
+                <div
+                    class="relative z-20 text-center bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20">
+                    <span class="text-xs text-amber-300 font-semibold uppercase tracking-wider">🎄 Cây Thông Của:
+                    </span>
+                    <span id="owner-display" class="font-bold text-white text-sm">Hãy nhập tên của bạn</span>
+                </div>
+
+                <!-- CÂY THÔNG MINH HỌA: tán lá nhiều lớp, đèn vàng và ornament có thể bấm -->
+                <div class="relative z-20 my-5 flex flex-col items-center w-full">
+                    <div class="tree-stage theme-warm" id="tree-stage">
+                        <div class="tree-glow"></div>
+                        <div class="absolute z-20 left-1/2 -translate-x-1/2 top-0 flex flex-col items-center">
+                            <svg class="tree-topper" width="45" height="45" viewBox="0 0 48 48"
+                                aria-label="Ngôi sao trên đỉnh cây">
+                                <path
+                                    d="M24 2.5 29.8 17l15.7 1.1-12 10 3.9 15.1L24 34.8 10.6 43.2 14.5 28.1 2.5 18.1 18.2 17Z"
+                                    fill="#f7d783" stroke="#fff0b6" stroke-width="1.5" stroke-linejoin="round" />
+                                <circle cx="24" cy="24" r="3" fill="#fff8d9" />
+                            </svg>
+                            <div class="-mt-1 rounded-full border border-amber-200/50 bg-[#fffaf0] px-3 py-1 shadow-lg">
+                                <img src="sjc-logo.png" alt="SJC" class="h-5 object-contain"
+                                    onerror="this.style.display='none'">
+
+                            </div>
+                        </div>
+                        <svg class="tree-art" viewBox="0 0 360 390" role="img"
+                            aria-label="Cây thông Giáng sinh minh họa với các tầng lá xanh, dây đèn vàng và gốc cây">
+                            <defs>
+                                <linearGradient id="pine1" x1="0" y1="0" x2="1" y2="1">
+                                    <stop stop-color="#4d9a68" />
+                                    <stop offset=".48" stop-color="#247044" />
+                                    <stop offset="1" stop-color="#103b2a" />
+                                </linearGradient>
+                                <linearGradient id="pine2" x1="0" y1="0" x2="1" y2="1">
+                                    <stop stop-color="#3e8656" />
+                                    <stop offset=".55" stop-color="#1c603b" />
+                                    <stop offset="1" stop-color="#0c3427" />
+                                </linearGradient>
+                                <linearGradient id="trunk" x1="0" y1="0" x2="1" y2="0">
+                                    <stop stop-color="#75452b" />
+                                    <stop offset=".5" stop-color="#b87a45" />
+                                    <stop offset="1" stop-color="#613a27" />
+                                </linearGradient>
+                                <linearGradient id="snow" x1="0" y1="0" x2="0" y2="1">
+                                    <stop stop-color="#fffdf3" />
+                                    <stop offset="1" stop-color="#cfe3d7" />
+                                </linearGradient>
+                            </defs>
+                            <ellipse cx="180" cy="365" rx="95" ry="13" fill="#030b09" opacity=".38" />
+                            <path d="M162 285 L198 285 L205 359 Q180 368 155 359Z" fill="url(#trunk)" stroke="#d5a16b"
+                                stroke-opacity=".4" />
+                            <path d="M180 290 L180 357" stroke="#e2b47c" stroke-opacity=".4" stroke-width="3" />
+                            <path
+                                d="M180 28 L105 137 L135 132 L72 218 L111 211 L38 305 Q180 335 322 305 L249 211 L288 218 L225 132 L255 137Z"
+                                fill="#092c20" opacity=".8" transform="translate(0 8)" />
+                            <path
+                                d="M180 26 L128 115 L151 110 L91 183 L126 176 L57 263 Q180 292 303 263 L234 176 L269 183 L209 110 L232 115Z"
+                                fill="url(#pine1)" stroke="#79b783" stroke-opacity=".36" stroke-width="1.5"
+                                stroke-linejoin="round" />
+                            <path d="M180 94 L106 201 L139 194 L76 275 Q180 303 284 275 L221 194 L254 201Z"
+                                fill="url(#pine2)" stroke="#76b58a" stroke-opacity=".28" stroke-width="1.5"
+                                stroke-linejoin="round" />
+                            <path d="M180 167 L90 283 Q180 318 270 283Z" fill="url(#pine1)" stroke="#77b98a"
+                                stroke-opacity=".35" stroke-width="1.5" stroke-linejoin="round" />
+                            <path
+                                d="M180 30 L143 91 L159 87 L125 132 M180 98 L128 176 L148 171 L109 219 M180 174 L126 257 L146 252 L116 283"
+                                fill="none" stroke="#a3d2a5" stroke-opacity=".36" stroke-width="3"
+                                stroke-linecap="round" />
+                            <path class="tree-lights"
+                                d="M143 91 C202 112 227 135 183 156 S124 190 180 210 S231 243 160 266 S150 284 208 293"
+                                fill="none" stroke="#f6d77f" stroke-width="2.4" stroke-linecap="round"
+                                stroke-dasharray="1 3" />
+                            <g class="tree-lights" fill="#ffe8a1">
+                                <circle cx="151" cy="95" r="3.2" />
+                                <circle cx="206" cy="115" r="3" />
+                                <circle cx="222" cy="139" r="3.2" />
+                                <circle cx="170" cy="164" r="3" />
+                                <circle cx="134" cy="188" r="3.1" />
+                                <circle cx="158" cy="215" r="3" />
+                                <circle cx="217" cy="238" r="3.2" />
+                                <circle cx="193" cy="266" r="3" />
+                                <circle cx="147" cy="281" r="3.2" />
+                                <circle cx="220" cy="286" r="3" />
+                            </g>
+                            <!-- Dây kim tuyến đỏ -->
+                            <path d="M118 128 Q180 150 238 126" fill="none" stroke="#d7263d" stroke-width="3.2"
+                                stroke-linecap="round" opacity=".9" />
+                            <path d="M100 205 Q180 236 262 203" fill="none" stroke="#e6c67e" stroke-width="3.2"
+                                stroke-linecap="round" stroke-dasharray="2 5" opacity=".95" />
+                            <path d="M78 280 Q180 312 284 279" fill="none" stroke="#d7263d" stroke-width="3.2"
+                                stroke-linecap="round" opacity=".9" />
+                            <!-- Bóng đèn nhấp nháy -->
+                            <g id="tree-bulbs"></g>
+                            <!-- Nơ đỏ trên cây -->
+                            <g transform="translate(180 64)">
+                                <path d="M0 0 C-14 -10 -16 6 0 2 C16 6 14 -10 0 0Z" fill="#c91c36" stroke="#ffb3a7"
+                                    stroke-width=".8" />
+                                <path d="M0 2 L-6 14 M0 2 L6 14" stroke="#c91c36" stroke-width="3"
+                                    stroke-linecap="round" />
+                                <circle r="2.6" fill="#ff6b7d" />
+                            </g>
+                            <!-- Hộp quà dưới gốc -->
+                            <g>
+                                <rect x="96" y="326" width="46" height="36" rx="3" fill="#c91c36" />
+                                <rect x="115" y="326" width="8" height="36" fill="#f4d58b" />
+                                <rect x="92" y="319" width="54" height="10" rx="2" fill="#a8152c" />
+                                <rect x="115" y="319" width="8" height="10" fill="#e6c67e" />
+                                <path d="M119 319 C108 306 102 316 119 319 C136 316 130 306 119 319Z" fill="#f4d58b" />
+                                <rect x="214" y="334" width="40" height="28" rx="3" fill="#1c5267" />
+                                <rect x="230" y="334" width="8" height="28" fill="#f7f1df" />
+                                <rect x="211" y="328" width="46" height="9" rx="2" fill="#174354" />
+                                <path d="M234 328 C224 317 219 326 234 328 C249 326 244 317 234 328Z" fill="#f7f1df" />
+                                <rect x="254" y="344" width="30" height="20" rx="3" fill="#e8b94f" />
+                                <rect x="266" y="344" width="6" height="20" fill="#c91c36" />
+                                <rect x="70" y="345" width="26" height="18" rx="3" fill="#d77b98" />
+                                <rect x="80" y="345" width="6" height="18" fill="#fff4f7" />
+                            </g>
+                            <!-- Kẹo gậy -->
+                            <g stroke-linecap="round" fill="none">
+                                <path d="M296 364 L296 326 Q296 314 306 314 Q316 314 316 324" stroke="#fffaf0"
+                                    stroke-width="6" />
+                                <path d="M296 364 L296 326 Q296 314 306 314 Q316 314 316 324" stroke="#d7263d"
+                                    stroke-width="6" stroke-dasharray="4 5" />
+                                <path d="M58 366 L58 334 Q58 323 48 323 Q38 323 38 332" stroke="#fffaf0"
+                                    stroke-width="5" />
+                                <path d="M58 366 L58 334 Q58 323 48 323 Q38 323 38 332" stroke="#2f9e5b"
+                                    stroke-width="5" stroke-dasharray="4 5" />
+                            </g>
+                            <path d="M20 368 Q180 350 340 368 L340 380 L20 380Z" fill="url(#snow)" opacity=".55" />
+                            <path
+                                d="M91 183 Q111 177 126 176 M234 176 Q252 181 269 183 M57 263 Q81 273 116 283 M244 283 Q277 273 303 263"
+                                fill="none" stroke="url(#snow)" stroke-width="5" stroke-linecap="round" opacity=".85" />
+                        </svg>
+                        <div id="dynamic-ornaments-container" class="absolute inset-0 z-10"
+                            aria-label="Các quả châu chứa lời chúc">
+                            <button type="button"
+                                onclick="openWishModal('Chúc cậu mùa đông không lạnh, luôn rực rỡ năng lượng!', 'Thanh Trúc')"
+                                class="tree-ornament red" style="left:39%;top:29%" title="Lời chúc từ Thanh Trúc"
+                                aria-label="Đọc lời chúc từ Thanh Trúc"></button>
+                            <button type="button"
+                                onclick="openWishModal('Học giỏi, điểm A+ tất cả các môn nghiên cứu nhé!', 'Bảo Châu')"
+                                class="tree-ornament gold" style="left:59%;top:35%" title="Lời chúc từ Bảo Châu"
+                                aria-label="Đọc lời chúc từ Bảo Châu"></button>
+                            <button type="button"
+                                onclick="openWishModal('Sớm hoàn thành term paper xuất sắc nha!', 'Đức Anh')"
+                                class="tree-ornament blue" style="left:30%;top:48%" title="Lời chúc từ Đức Anh"
+                                aria-label="Đọc lời chúc từ Đức Anh"></button>
+                            <button type="button"
+                                onclick="openWishModal('Treo hộp quà gửi gắm ngàn lời chúc tốt đẹp nhất!', 'Minh Anh')"
+                                class="tree-ornament gift" style="left:67%;top:51%" title="Lời chúc từ Minh Anh"
+                                aria-label="Đọc lời chúc từ Minh Anh">🎀</button>
+                            <button type="button"
+                                onclick="openWishModal('Chúc chiến dịch SJC Christmas thành công rực rỡ!', 'Ban Truyền Thông')"
+                                class="tree-ornament pink" style="left:42%;top:66%" title="Lời chúc từ Ban Truyền Thông"
+                                aria-label="Đọc lời chúc từ Ban Truyền Thông"></button>
+                            <button type="button"
+                                onclick="openWishModal('Luôn giữ vững đam mê báo chí và sáng tạo nhé!', 'Thầy Cô Viện Báo Chí')"
+                                class="tree-ornament red" style="left:61%;top:69%;width:30px;height:30px"
+                                title="Lời chúc từ Thầy Cô" aria-label="Đọc lời chúc từ Thầy Cô"></button>
+                        </div>
+                    </div>
+                    <p class="-mt-1 text-[10px] tracking-[.2em] uppercase text-amber-100/65">Tap an ornament to read a
+                        wish</p>
+                    <div class="mt-3 flex flex-wrap justify-center gap-2">
+                        <button type="button" id="btn-lights" class="tree-ctrl active" onclick="toggleTreeLights()">💡
+                            <span>Tắt đèn</span></button>
+                        <button type="button" class="tree-ctrl" onclick="cycleLightTheme()">🌈 <span
+                                id="light-theme-label">Đèn vàng ấm</span></button>
+                        <button type="button" class="tree-ctrl" onclick="shakeTree()">🎄 Lắc cây</button>
+                        <button type="button" class="tree-ctrl" onclick="openRandomWish()">🎲 Lời chúc ngẫu
+                            nhiên</button>
+                    </div>
+                </div>
+
+                <!-- Thống kê & Nút hành động -->
+                <div
+                    class="relative z-20 flex flex-wrap gap-3 justify-between items-center w-full pt-3 border-t border-white/10">
+                    <span class="text-xs text-amber-200 font-medium">🎄 Your tree has <strong id="wish-count"
+                            class="text-green-400 text-sm">6</strong> wishes.</span>
+                    <div class="flex gap-2">
+                        <button onclick="openCustomizerModal()"
+                            class="bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold px-3 py-2 rounded-xl text-xs transition-all shadow">
+                            🎨 Tùy Chỉnh
+                        </button>
+                        <button onclick="shareTreeLink()"
+                            class="bg-red-600 hover:bg-red-700 text-white font-bold px-3 py-2 rounded-xl text-xs transition-all shadow">
+                            🔗 Chia Sẻ Link
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FORM GỬI LỜI CHÚC CHO CHỦ NHÂN -->
+            <div class="lg:col-span-5 vintage-card rounded-3xl p-6 md:p-8 bg-white space-y-5">
+                <div class="border-b border-stone-200 pb-3">
+                    <h3 class="text-xl font-bold text-stone-800 font-script">Gửi Lời Chúc Lên Cây 🎄</h3>
+                    <p class="text-xs text-stone-500 mt-1">Chọn quả châu và để lại thông điệp ý nghĩa cho chủ nhân cây
+                        thông.</p>
+                </div>
+
+                <form id="sendWishForm" onsubmit="handleSendWish(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-stone-700 uppercase mb-1">Tên của bạn / Biệt
+                            danh</label>
+                        <input type="text" id="senderName" required
+                            class="w-full bg-[#FBF9F1] border border-stone-300 rounded-xl px-3 py-2.5 text-stone-800 text-sm focus:outline-none focus:border-red-600"
+                            placeholder="Tên của bạn">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-stone-700 uppercase mb-1">Chọn loại Ornament trang
+                            trí</label>
+                        <div class="grid grid-cols-4 sm:grid-cols-6 gap-2 pt-1">
+                            <label class="ornament-option relative"><input type="radio" name="ornamentType" value="red"
+                                    checked><span class="swatch" style="background:var(--orn-red)"></span>Đỏ</label>
+                            <label class="ornament-option relative"><input type="radio" name="ornamentType"
+                                    value="gold"><span class="swatch"
+                                    style="background:var(--orn-gold)"></span>Vàng</label>
+                            <label class="ornament-option relative"><input type="radio" name="ornamentType"
+                                    value="blue"><span class="swatch"
+                                    style="background:var(--orn-blue)"></span>Xanh</label>
+                            <label class="ornament-option relative"><input type="radio" name="ornamentType"
+                                    value="pink"><span class="swatch"
+                                    style="background:var(--orn-pink)"></span>Hồng</label>
+                            <label class="ornament-option relative"><input type="radio" name="ornamentType"
+                                    value="silver"><span class="swatch"
+                                    style="background:var(--orn-silver)"></span>Bạc</label>
+                            <label class="ornament-option relative"><input type="radio" name="ornamentType"
+                                    value="gift"><span class="swatch">🎁</span>Hộp quà</label>
+                            <label class="ornament-option relative"><input type="radio" name="ornamentType"
+                                    value="bell"><span class="swatch">🔔</span>Chuông</label>
+                            <label class="ornament-option relative"><input type="radio" name="ornamentType"
+                                    value="star"><span class="swatch">⭐</span>Ngôi sao</label>
+                            <label class="ornament-option relative"><input type="radio" name="ornamentType"
+                                    value="candy"><span class="swatch">🍭</span>Kẹo gậy</label>
+                            <label class="ornament-option relative"><input type="radio" name="ornamentType"
+                                    value="snow"><span class="swatch">❄️</span>Bông tuyết</label>
+                            <label class="ornament-option relative"><input type="radio" name="ornamentType"
+                                    value="heart"><span class="swatch">💖</span>Trái tim</label>
+                            <label class="ornament-option relative"><input type="radio" name="ornamentType"
+                                    value="cookie"><span class="swatch">🍪</span>Bánh gừng</label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-stone-700 uppercase mb-1">Lời chúc Giáng Sinh</label>
+                        <textarea id="wishMessage" rows="3" required maxlength="200"
+                            oninput="document.getElementById('wish-chars').textContent=this.value.length"
+                            class="w-full bg-[#FBF9F1] border border-stone-300 rounded-xl px-3 py-2.5 text-stone-800 text-sm focus:outline-none focus:border-red-600 resize-none"
+                            placeholder="Gửi gắm thông điệp ngọt ngào hoặc dí dỏm..."></textarea>
+                        <div class="text-right text-[10px] text-stone-400 mt-0.5"><span id="wish-chars">0</span>/200
+                        </div>
+                    </div>
+
+                    <button type="submit"
+                        class="w-full bg-[#1E5631] hover:bg-green-800 text-white font-bold py-3 rounded-xl shadow-md transition-all text-sm">
+                        ✨ Treo Lời Chúc Lên Cây
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- THE FOREST OF WISHES (KHU RÙNG GIÁNG SINH CHUNG) -->
+    <section id="forest-section" class="relative z-10 max-w-6xl mx-auto px-6 py-16 border-t border-[#E8E2CD]">
+        <div class="text-center max-w-2xl mx-auto mb-10">
+            <span
+                class="text-[#1E5631] font-bold text-xs tracking-widest uppercase bg-green-100 px-3 py-1 rounded-full">
+                Community Forest
+            </span>
+            <h2 class="text-3xl md:text-4xl font-bold text-stone-800 font-script mt-2">
+                The Forest of Wishes 🌲
+            </h2>
+            <p class="text-stone-600 text-sm mt-2">
+                Khám phá cây thông của các sinh viên khác trong khu rừng chung. Tôn trọng quyền riêng tư: Bạn có thể
+                thấy số lượng lời chúc nhưng chỉ chủ nhân mới đọc được nội dung chi tiết.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="forest-grid">
+            <!-- Cây 1 -->
+            <div
+                class="vintage-card rounded-2xl p-5 bg-white flex flex-col items-center text-center justify-between hover:-translate-y-1 transition-transform">
+                <div class="text-4xl mb-2">🎄</div>
+                <h3 class="font-bold text-stone-800 text-base">Minh Anh's Tree</h3>
+                <p class="text-xs text-green-700 font-semibold my-1">🌲 17 wishes</p>
+                <p class="text-[11px] text-stone-400 italic mb-4">"Riêng tư — Cần link chia sẻ từ chủ nhân để đọc"</p>
+                <button
+                    onclick="showToast('🔒 Đây là cây riêng tư của Minh Anh. Hãy xin link chia sẻ từ bạn ấy để gửi lời chúc nhé!')"
+                    class="w-full bg-stone-100 hover:bg-stone-200 text-stone-800 font-semibold py-2 rounded-xl text-xs transition-all">
+                    Ghé thăm cây
+                </button>
+            </div>
+            <!-- Cây 2 -->
+            <div
+                class="vintage-card rounded-2xl p-5 bg-white flex flex-col items-center text-center justify-between hover:-translate-y-1 transition-transform">
+                <div class="text-4xl mb-2">🎄</div>
+                <h3 class="font-bold text-stone-800 text-base">Đức Anh's Tree</h3>
+                <p class="text-xs text-green-700 font-semibold my-1">🌲 8 wishes</p>
+                <p class="text-[11px] text-stone-400 italic mb-4">"Riêng tư — Cần link chia sẻ từ chủ nhân để đọc"</p>
+                <button onclick="showToast('🔒 Đây là cây riêng tư của Đức Anh.')"
+                    class="w-full bg-stone-100 hover:bg-stone-200 text-stone-800 font-semibold py-2 rounded-xl text-xs transition-all">
+                    Ghé thăm cây
+                </button>
+            </div>
+            <!-- Cây 3 -->
+            <div
+                class="vintage-card rounded-2xl p-5 bg-white flex flex-col items-center text-center justify-between hover:-translate-y-1 transition-transform">
+                <div class="text-4xl mb-2">🎄</div>
+                <h3 class="font-bold text-stone-800 text-base">Mai's Tree</h3>
+                <p class="text-xs text-green-700 font-semibold my-1">🌲 24 wishes</p>
+                <p class="text-[11px] text-stone-400 italic mb-4">"Riêng tư — Cần link chia sẻ từ chủ nhân để đọc"</p>
+                <button onclick="showToast('🔒 Đây là cây riêng tư của Mai.')"
+                    class="w-full bg-stone-100 hover:bg-stone-200 text-stone-800 font-semibold py-2 rounded-xl text-xs transition-all">
+                    Ghé thăm cây
+                </button>
+            </div>
+            <!-- Cây 4 -->
+            <div
+                class="vintage-card rounded-2xl p-5 bg-white flex flex-col items-center text-center justify-between hover:-translate-y-1 transition-transform">
+                <div class="text-4xl mb-2">🎄</div>
+                <h3 class="font-bold text-stone-800 text-base">Phương Cúc's Tree</h3>
+                <p class="text-xs text-green-700 font-semibold my-1">🌲 <span id="forest-my-count">6</span> wishes</p>
+                <p class="text-[11px] text-stone-400 italic mb-4">"Cây thông chính của bạn"</p>
+                <a href="#tree-section"
+                    class="w-full bg-[#C91C1C] hover:bg-red-700 text-white font-semibold py-2 rounded-xl text-xs transition-all flex items-center justify-center">
+                    Quản lý cây của tôi
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- 🎬 SJC MINI CINEMA: CHẠM GIÁNG SINH -->
+    <section id="cinema-section" class="relative z-10 max-w-6xl mx-auto px-6 py-16 border-t border-[#E8E2CD]">
+        <div class="text-center max-w-2xl mx-auto mb-10">
+            <span class="text-[#C91C1C] font-bold text-xs tracking-widest uppercase bg-red-100 px-3 py-1 rounded-full">
+                SJC Animation Studio
+            </span>
+            <h2 class="text-3xl md:text-5xl font-bold text-stone-800 font-script mt-4">
+                Chạm Giáng Sinh 🎬
+            </h2>
+            <p class="text-stone-600 text-sm md:text-base mt-3 leading-relaxed">
+                Khi những sản phẩm đồ án không chỉ dừng lại ở kỹ thuật, mà là hơi ấm mùa đông được gửi gắm qua từng
+                khung hình. Hãy thư giãn và thưởng thức thước phim hoạt hình đặc biệt này.
+            </p>
+        </div>
+
+        <!-- Khung Rạp Chiếu Phim Mini phong cách Vintage -->
+        <div
+            class="vintage-card rounded-3xl p-4 md:p-8 bg-gradient-to-b from-[#2B080D] to-[#1A0508] relative overflow-hidden shadow-2xl border-2 border-[#D4AF37]">
+
+            <!-- Đèn lấp lánh hắt từ phía sau rạp -->
+            <div class="absolute -top-20 -left-20 w-64 h-64 bg-yellow-500/10 rounded-full blur-3xl pointer-events-none">
+            </div>
+            <div
+                class="absolute -bottom-20 -right-20 w-64 h-64 bg-red-600/20 rounded-full blur-3xl pointer-events-none">
+            </div>
+
+            <!-- Dây đèn trang trí vắt ngang màn hình -->
+            <div
+                class="absolute top-0 left-0 w-full h-8 opacity-40 pointer-events-none flex justify-around items-start pt-2">
+                <div class="w-1.5 h-1.5 rounded-full bg-yellow-300 shadow-[0_0_8px_rgba(253,224,71,1)] animate-pulse">
+                </div>
+                <div
+                    class="w-1.5 h-1.5 rounded-full bg-red-400 shadow-[0_0_8px_rgba(248,113,113,1)] animate-pulse delay-75">
+                </div>
+                <div
+                    class="w-1.5 h-1.5 rounded-full bg-yellow-300 shadow-[0_0_8px_rgba(253,224,71,1)] animate-pulse delay-150">
+                </div>
+                <div
+                    class="w-1.5 h-1.5 rounded-full bg-red-400 shadow-[0_0_8px_rgba(248,113,113,1)] animate-pulse delay-75">
+                </div>
+                <div class="w-1.5 h-1.5 rounded-full bg-yellow-300 shadow-[0_0_8px_rgba(253,224,71,1)] animate-pulse">
+                </div>
+            </div>
+
+            <!-- Container Video chuẩn tỷ lệ 16:9 -->
+            <div
+                class="relative z-10 w-full aspect-video rounded-2xl overflow-hidden border border-amber-900/50 shadow-[0_0_40px_rgba(250,204,21,0.15)] bg-black">
+                <!-- NHÚNG YOUTUBE Ở ĐÂY -->
+                <!-- Tham số ?rel=0&modestbranding=1 giúp giao diện Youtube gọn gàng hơn -->
+                <iframe class="absolute top-0 left-0 w-full h-full"
+                    src="https://www.youtube.com/embed/JUnyBEJc3OE?rel=0&modestbranding=1"
+                    title="Chạm Giáng Sinh - SJC Animation" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <!-- Footer rạp chiếu phim (Tiêu đề & Nút chia sẻ) -->
+            <div
+                class="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center mt-6 px-2 gap-4">
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-12 h-12 rounded-full bg-[#3D141B] border border-[#5C1E29] flex items-center justify-center text-2xl shadow-inner">
+                        🍿
+                    </div>
+                    <div>
+                        <h4 class="text-amber-50 font-bold text-base font-script tracking-wide">Chạm Giáng Sinh</h4>
+                        <p class="text-stone-400 text-xs mt-0.5">Một sản phẩm hoạt hình từ Viện Đào tạo Báo chí và
+                            Truyền thông</p>
+                    </div>
+                </div>
+
+                <button onclick="showToast('🔗 Đã sao chép link video vào clipboard!')"
+                    class="w-full md:w-auto bg-white/10 hover:bg-white/20 text-amber-100 px-5 py-2.5 rounded-xl text-xs font-semibold transition-all flex items-center justify-center gap-2 border border-white/10">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z">
+                        </path>
+                    </svg>
+                    Chia sẻ thước phim
+                </button>
+            </div>
+        </div>
+    </section>
+    <!-- ============================================================
+  HỘP QUÀ ĐẶC BIỆT SJC - MÙA LỄ HỘI 2026
+ ============================================================ -->
+
+    <style>
+        .gift-box-container {
+            perspective: 1000px;
+        }
+
+        .gift-lid {
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: top;
+        }
+
+        .gift-box-container.opened .gift-lid {
+            transform: rotateX(-110deg) translateY(-20px);
+        }
+
+        .gift-box-container.opened .gift-contents {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .gift-contents {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.6s ease 0.3s;
+        }
+
+        @keyframes box-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 15px rgba(231, 76, 60, 0.4), 0 0 30px rgba(241, 196, 15, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 25px rgba(231, 76, 60, 0.8), 0 0 50px rgba(46, 204, 113, 0.5);
+            }
+        }
+
+        .gift-shining {
+            animation: box-glow 2.5s infinite ease-in-out;
+        }
+    </style>
+
+    <!-- ============================================================
+  HỘP QUÀ ĐẶC BIỆT SJC & BỐC THĂM 100 SUẤT MAY MẮN
+ ============================================================ -->
+
+    <style>
+        .gift-box-container {
+            perspective: 1000px;
+        }
+
+        .gift-lid {
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: top;
+        }
+
+        .gift-box-container.opened .gift-lid {
+            transform: rotateX(-110deg) translateY(-20px);
+        }
+
+        .gift-box-container.opened .gift-contents {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .gift-contents {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.6s ease 0.3s;
+        }
+
+        @keyframes box-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 15px rgba(231, 76, 60, 0.4), 0 0 30px rgba(241, 196, 15, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 25px rgba(231, 76, 60, 0.8), 0 0 50px rgba(46, 204, 113, 0.5);
+            }
+        }
+
+        .gift-shining {
+            animation: box-glow 2.5s infinite ease-in-out;
+        }
+
+        .mystery-box {
+            background: linear-gradient(135deg, #2C3E50, #1A252F);
+            border: 2px dashed #F1C40F;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mystery-box::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle, rgba(241, 196, 15, 0.2) 0%, transparent 70%);
+            animation: pulse 2s infinite;
+        }
+    </style>
+
+    <section id="gift-box" class="relative z-10 max-w-5xl mx-auto px-6 py-16 border-t border-[#E8E2CD]">
+        <div class="text-center max-w-2xl mx-auto mb-10">
+            <span
+                class="text-[#C91C1C] font-bold text-xs tracking-widest uppercase bg-red-100 px-3 py-1 rounded-full shadow-sm">
+                SJC Special Gift Box 🎁
+            </span>
+            <h2 class="text-3xl md:text-4xl font-bold text-stone-800 font-script mt-2">
+                Hộp Quà Giáng Sinh May Mắn
+            </h2>
+            <p class="text-stone-600 text-sm mt-2">
+                Chương trình đặc biệt: <strong class="text-[#C91C1C]">Bốc thăm 100 bạn may mắn nhất</strong> sẽ nhận
+                được hộp quà độc quyền tràn ngập yêu thương từ Viện Đào tạo Báo chí và Truyền thông!
+            </p>
+        </div>
+
+        <!-- KHUNG HỘP QUÀ TƯƠNG TÁC -->
+        <div
+            class="max-w-4xl mx-auto bg-[#FDFBF7] p-6 md:p-8 rounded-3xl border-4 border-[#1E5631] shadow-2xl relative overflow-hidden">
+
+            <div id="gift-wrapper" class="gift-box-container flex flex-col items-center">
+
+                <p class="text-xs font-semibold text-[#C91C1C] mb-6 bg-red-50 px-4 py-2 rounded-full border border-red-200 animate-pulse text-center"
+                    id="gift-instruction">
+                    ✨ Nhấn vào hộp quà bên dưới để mở nắp khám phá các vật phẩm bên trong! ✨
+                </p>
+
+                <!-- HỘP QUÀ KRAFT THỰC TẾ -->
+                <div onclick="toggleGiftBox()"
+                    class="relative w-72 md:w-80 h-96 bg-[#C49A6C] rounded-2xl shadow-2xl cursor-pointer border-4 border-[#A37547] flex flex-col items-center justify-between p-6 gift-shining">
+
+                    <div
+                        class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-6 bg-[#D7CCC8]/80 border-x border-[#A37547]/40 pointer-events-none">
+                    </div>
+                    <div
+                        class="absolute inset-x-0 top-1/2 -translate-y-1/2 h-6 bg-[#D7CCC8]/80 border-y border-[#A37547]/40 pointer-events-none">
+                    </div>
+
+                    <!-- NẮP HỘP QUÀ -->
+                    <div
+                        class="gift-lid absolute -top-3 -left-3 -right-3 h-24 bg-[#B58554] rounded-2xl border-4 border-[#8C6239] shadow-md z-20 flex flex-col items-center justify-center p-2">
+                        <div class="text-2xl">🎀</div>
+                        <span class="text-[10px] font-bold text-white tracking-widest mt-1 uppercase">MERRY CHRISTMAS -
+                            SJC</span>
+                    </div>
+
+                    <!-- THIỆP TRÊN HỘP -->
+                    <div
+                        class="relative z-10 w-48 h-64 bg-white rounded-lg shadow-md p-3 flex flex-col items-center justify-between text-center mt-12 border border-stone-300">
+                        <div class="text-[9px] font-bold text-[#1E5631]">SJC - VNUJC</div>
+                        <div class="text-xs font-bold text-[#C91C1C] font-script">Merry Christmas & Giáng Sinh An Lành
+                        </div>
+                        <div
+                            class="w-full h-20 bg-[#F5EFEB] rounded border border-stone-200 flex items-center justify-center text-[9px] text-stone-600 font-semibold">
+                            🏫 Hộp quà 100 suất giới hạn
+                        </div>
+                        <div class="text-[8px] text-stone-500">Together, we create stories.</div>
+                    </div>
+
+                    <div
+                        class="relative z-10 text-white text-[11px] font-bold bg-[#1E5631]/90 px-3 py-1.5 rounded-full shadow">
+                        Bấm để mở hộp 🎁
+                    </div>
+                </div>
+
+                <!-- NỘI DUNG BÊN TRONG HỘP QUÀ (HIỂN THỊ KHI MỞ) -->
+                <div id="gift-contents"
+                    class="gift-contents w-full mt-8 bg-white p-6 md:p-8 rounded-2xl border-2 border-[#C91C1C] shadow-inner">
+                    <div class="text-center mb-6">
+                        <h3 class="text-2xl font-bold text-[#1E5631] font-script">🎁 Bên Trong Hộp Quà Có Gì? 🎁</h3>
+                        <p class="text-stone-600 text-xs mt-1">Chi tiết các vật phẩm thiết kế độc quyền dành riêng cho
+                            sự kiện Giáng sinh SJC 2026.</p>
+                    </div>
+
+                    <!-- LƯỚI ẢNH CÁC MÓN QUÀ -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-8">
+
+                        <!-- Món 1: Thiệp -->
+                        <div
+                            class="bg-[#FDFBF7] p-3 rounded-2xl border border-stone-200 text-center flex flex-col items-center shadow-sm hover:shadow-md transition-shadow">
+                            <img src="thiep.png" alt="Thiệp & Sticker SJC"
+                                class="w-20 h-20 object-cover rounded-xl mb-2 border border-stone-100 shadow-sm"
+                                onerror="this.src='https://images.unsplash.com/photo-1543589077-47d81606c1bf?w=200'">
+                            <h4 class="font-bold text-xs text-stone-800">Thiệp</h4>
+                            <p class="text-[10px] text-stone-500 mt-0.5">Timeline</p>
+                        </div>
+                        <!-- Món 1: Sticker -->
+                        <div
+                            class="bg-[#FDFBF7] p-3 rounded-2xl border border-stone-200 text-center flex flex-col items-center shadow-sm hover:shadow-md transition-shadow">
+                            <img src="sticker.png" alt="Thiệp & Sticker SJC"
+                                class="w-20 h-20 object-cover rounded-xl mb-2 border border-stone-100 shadow-sm"
+                                onerror="this.src='https://images.unsplash.com/photo-1543589077-47d81606c1bf?w=200'">
+                            <h4 class="font-bold text-xs text-stone-800">Sticker</h4>
+                            <p class="text-[10px] text-stone-500 mt-0.5">Hình dán độc quyền</p>
+                        </div>
+                        <!-- Món 2: Móc khóa SJC quấn đèn -->
+                        <div
+                            class="bg-[#FDFBF7] p-3 rounded-2xl border border-stone-200 text-center flex flex-col items-center shadow-sm hover:shadow-md transition-shadow">
+                            <img src="mockhoa.png" alt="Móc khóa SJC"
+                                class="w-20 h-20 object-cover rounded-xl mb-2 border border-stone-100 shadow-sm"
+                                onerror="this.src='https://images.unsplash.com/photo-1572930261965-452f35f3458c?w=200'">
+                            <h4 class="font-bold text-xs text-stone-800">Móc Khóa SJC</h4>
+                            <p class="text-[10px] text-stone-500 mt-0.5">Acrylic phối đèn lấp lánh</p>
+                        </div>
+
+                        <!-- Món 3: Nến thơm -->
+                        <div
+                            class="bg-[#FDFBF7] p-3 rounded-2xl border border-stone-200 text-center flex flex-col items-center shadow-sm hover:shadow-md transition-shadow">
+                            <img src="nen.png" alt="Nến thơm"
+                                class="w-20 h-20 object-cover rounded-xl mb-2 border border-stone-100 shadow-sm"
+                                onerror="this.src='https://images.unsplash.com/photo-1603006905003-be475563bc59?w=200'">
+                            <h4 class="font-bold text-xs text-stone-800">Nến Thơm</h4>
+                            <p class="text-[10px] text-stone-500 mt-0.5">Hương thơm mùa đông ấm áp</p>
+                        </div>
+
+                        <!-- Món 4: Bánh Crinkle -->
+                        <div
+                            class="bg-[#FDFBF7] p-3 rounded-2xl border border-stone-200 text-center flex flex-col items-center shadow-sm hover:shadow-md transition-shadow">
+                            <img src="banhcrinkle.png" alt="Bánh Crinkle"
+                                class="w-20 h-20 object-cover rounded-xl mb-2 border border-stone-100 shadow-sm"
+                                onerror="this.src='https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?w=200'">
+                            <h4 class="font-bold text-xs text-stone-800">Bánh Crinkle</h4>
+                            <p class="text-[10px] text-stone-500 mt-0.5">Bánh quy chocolate ngọt ngào</p>
+                        </div>
+
+                        <!-- Món 5: Cốc Giáng sinh -->
+                        <div
+                            class="bg-[#FDFBF7] p-3 rounded-2xl border border-stone-200 text-center flex flex-col items-center shadow-sm hover:shadow-md transition-shadow">
+                            <img src="coc.png" alt="Bánh Crinkle"
+                                class="w-20 h-20 object-cover rounded-xl mb-2 border border-stone-100 shadow-sm"
+                                onerror="this.src='https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?w=200'">
+                            <h4 class="font-bold text-xs text-stone-800">Cốc giáng sinh</h4>
+                            <p class="text-[10px] text-stone-500 mt-0.5">Thiết kế độc quyền</p>
+                        </div>
+
+                        <!-- Món 6: Hộp Quà Bí Mật (Blind Box) -->
+                        <div class="mystery-box p-3 rounded-2xl text-center flex flex-col items-center justify-center shadow-md relative group cursor-pointer"
+                            onclick="alert('🎁 Đây là Món Quà Bí Mật (Blind Box) bất ngờ dành riêng cho những bạn may mắn trúng giải đặc biệt từ SJC!')">
+                            <div class="text-3xl mb-1 animate-bounce">❓</div>
+                            <h4 class="font-bold text-xs text-yellow-300">Blind Box Bí Mật</h4>
+                            <p class="text-[9px] text-yellow-100 mt-0.5 font-semibold">Món quà bất ngờ từ Ban Tổ Chức!
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <!-- KHU VỰC NÚT ĐĂNG KÝ NGAY -->
+                    <div
+                        class="bg-[#F5EFEB] p-6 rounded-2xl border border-stone-200 text-center flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div class="text-left">
+                            <span class="text-xs font-bold text-[#C91C1C] uppercase">⚡ SỐ LƯỢNG GIỚI HẠN</span>
+                            <h4 class="text-stone-800 font-bold text-sm mt-0.5">Đăng ký ngay để tham gia bốc thăm 100
+                                hộp quà SJC!</h4>
+                            <p class="text-stone-600 text-xs">Kết quả sẽ được công bố trực tiếp trước sự kiện.</p>
+                        </div>
+                        <a id="register" href="#register" onclick="registerGift(event)"
+                            class="bg-[#C91C1C] hover:bg-red-700 text-white font-bold px-8 py-3 rounded-xl text-xs whitespace-nowrap shadow-lg transition-all transform hover:scale-105">
+                            📝 Đăng Ký Nhận Quà Ngay
+                        </a>
+                    </div>
+
+                    <div class="text-center mt-6">
+                        <button onclick="toggleGiftBox()"
+                            class="text-xs font-semibold text-stone-500 hover:text-stone-800 underline">
+                            📦 Đóng hộp lại
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function toggleGiftBox() {
+            const container = document.getElementById('gift-wrapper');
+            const instruction = document.getElementById('gift-instruction');
+            container.classList.toggle('opened');
+
+            if (container.classList.contains('opened')) {
+                instruction.textContent = "🎉 Mở hộp thành công! Khám phá ngay các vật phẩm độc quyền và đăng ký bốc thăm bên dưới!";
+                instruction.className = "text-xs font-semibold text-[#1E5631] mb-6 bg-green-50 px-4 py-2 rounded-full border border-green-200 text-center";
+            } else {
+                instruction.textContent = "✨ Nhấn vào hộp quà bên dưới để mở nắp khám phá các vật phẩm bên trong! ✨";
+                instruction.className = "text-xs font-semibold text-[#C91C1C] mb-6 bg-red-50 px-4 py-2 rounded-full border border-red-200 animate-pulse text-center";
+            }
+        }
+
+        function registerGift(e) {
+            e.preventDefault();
+
+            const msg = "📝 Cảm ơn bạn đã đăng ký! Bạn đã được ghi tên vào danh sách bốc thăm 100 hộp quà may mắn nhất từ SJC!";
+
+            if (window.showToast) {
+                window.showToast(msg);
+            } else {
+                alert(msg);
+            }
+
+            setTimeout(() => {
+                const form = document.getElementById("register-form");
+
+                if (form) {
+                    form.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+                }
+            }, 200);
+        }
+    </script>
+
+    <script>
+        function toggleGiftBox() {
+            const container = document.getElementById('gift-wrapper');
+            const instruction = document.getElementById('gift-instruction');
+            container.classList.toggle('opened');
+
+            if (container.classList.contains('opened')) {
+                instruction.textContent = "🎉 Chúc mừng bạn đã mở hộp quà thành công! Hãy xem các vật phẩm tuyệt vời bên dưới nhé!";
+                instruction.className = "text-xs font-semibold text-[#1E5631] mb-4 bg-green-50 px-4 py-1.5 rounded-full border border-green-200";
+            } else {
+                instruction.textContent = "✨ Nhấn vào hộp quà bên dưới để mở nắp và khám phá bên trong! ✨";
+                instruction.className = "text-xs font-semibold text-[#C91C1C] mb-4 bg-red-50 px-4 py-1.5 rounded-full border border-red-200 animate-pulse";
+            }
+        }
+    </script>
+
+    <!-- CHRISTMAS WORKSHOP STATION (Đã tích hợp Video thật) -->
+    <section id="workshop-section" class="relative z-10 max-w-6xl mx-auto px-6 py-16 border-t border-[#E8E2CD]">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <span
+                class="text-[#1E5631] font-bold text-xs tracking-widest uppercase bg-green-100 px-3 py-1 rounded-full">
+                Creative Handcraft Station
+            </span>
+            <h2 class="text-3xl md:text-4xl font-bold text-stone-800 font-script mt-2">
+                Workshop "Gấp! Gấp! Noel tới rồi!"
+            </h2>
+            <p class="text-stone-600 text-sm mt-2">
+                Khám phá các trạm thủ công mùa lễ hội, học cách tự tay làm đồ trang trí và thiệp độc bản cùng SJC.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Video 1: Gấp cây thông -->
+            <div
+                class="vintage-card rounded-2xl overflow-hidden bg-white flex flex-col justify-between group hover:-translate-y-1 transition-transform">
+                <div
+                    class="h-40 bg-gradient-to-br from-emerald-800 to-green-900 relative flex items-center justify-center text-4xl">
+                    🎄
+                    <span
+                        class="absolute top-3 right-3 bg-black/40 text-white text-[10px] px-2.5 py-1 rounded-full">Tutorial</span>
+                </div>
+                <div class="p-6 space-y-3 flex-1 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-bold text-stone-800 text-lg">Gấp Cây Thông Giáng Sinh</h3>
+                        <p class="text-stone-600 text-xs mt-1 leading-relaxed">Hướng dẫn chi tiết cách gấp cây thông
+                            trang trí từ giấy.</p>
+                    </div>
+                    <button
+                        onclick="openRealVideoModal('https://www.youtube.com/embed/VNxKjj0l9MM', 'Gấp Cây Thông Giáng Sinh')"
+                        class="w-full bg-[#C91C1C] hover:bg-red-700 text-white font-semibold py-2.5 rounded-xl text-xs transition-all shadow-sm flex items-center justify-center gap-2">
+                        ▶ Watch Tutorial
+                    </button>
+                </div>
+            </div>
+
+            <!-- Video 2: Gấp mũ giáng sinh -->
+            <div
+                class="vintage-card rounded-2xl overflow-hidden bg-white flex flex-col justify-between group hover:-translate-y-1 transition-transform">
+                <div
+                    class="h-40 bg-gradient-to-br from-red-800 to-rose-950 relative flex items-center justify-center text-4xl">
+                    🎅
+                    <span
+                        class="absolute top-3 right-3 bg-black/40 text-white text-[10px] px-2.5 py-1 rounded-full">Tutorial</span>
+                </div>
+                <div class="p-6 space-y-3 flex-1 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-bold text-stone-800 text-lg">Gấp Mũ Giáng Sinh</h3>
+                        <p class="text-stone-600 text-xs mt-1 leading-relaxed">Làm mũ Noel thủ công cực xinh để
+                            check-in.</p>
+                    </div>
+                    <button
+                        onclick="openRealVideoModal('https://www.youtube.com/embed/UxJdSL-7PtE', 'Gấp Mũ Giáng Sinh')"
+                        class="w-full bg-[#C91C1C] hover:bg-red-700 text-white font-semibold py-2.5 rounded-xl text-xs transition-all shadow-sm flex items-center justify-center gap-2">
+                        ▶ Watch Tutorial
+                    </button>
+                </div>
+            </div>
+
+            <!-- Video 3: Gấp ông già Noel -->
+            <div
+                class="vintage-card rounded-2xl overflow-hidden bg-white flex flex-col justify-between group hover:-translate-y-1 transition-transform">
+                <div
+                    class="h-40 bg-gradient-to-br from-amber-700 to-yellow-900 relative flex items-center justify-center text-4xl">
+                    🎁
+                    <span
+                        class="absolute top-3 right-3 bg-black/40 text-white text-[10px] px-2.5 py-1 rounded-full">Tutorial</span>
+                </div>
+                <div class="p-6 space-y-3 flex-1 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-bold text-stone-800 text-lg">Gấp Ông Già Noel</h3>
+                        <p class="text-stone-600 text-xs mt-1 leading-relaxed">Khám phá cách gấp ông già Noel độc đáo.
+                        </p>
+                    </div>
+                    <button
+                        onclick="openRealVideoModal('https://www.youtube.com/embed/yMAwRk50zAQ', 'Gấp Ông Già Noel')"
+                        class="w-full bg-[#C91C1C] hover:bg-red-700 text-white font-semibold py-2.5 rounded-xl text-xs transition-all shadow-sm flex items-center justify-center gap-2">
+                        ▶ Watch Tutorial
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+  SƠ ĐỒ USSH MÙA GIÁNG SINH - SJC (Phiên bản Đèn Cố Định Hoàn Hảo)
+ ============================================================ -->
+
+    <style>
+        :root {
+            --campus-paper: #FDFBF7;
+            --campus-pine: #1E5631;
+            /* Xanh thông Noel */
+            --campus-berry: #C91C1C;
+            /* Đỏ Giáng sinh */
+            --campus-gold: #E8B94F;
+            /* Vàng ánh kim */
+            --campus-ink: #1C2833;
+            --campus-snow: #FFFFFF;
+            --campus-wayfinding: #34495E;
+            --campus-booth: #FFF9E6;
+            --campus-wire: #117A65;
+        }
+
+        .campus-section {
+            position: relative;
+        }
+
+        .campus-scroll {
+            overflow-x: auto;
+            padding: 6px;
+            scrollbar-color: var(--campus-pine) var(--campus-paper);
+        }
+
+        .campus-map {
+            display: block;
+            width: 100%;
+            min-width: 620px;
+            height: auto;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Giấy bản đồ & đường đi */
+        .campus-paper {
+            fill: var(--campus-paper);
+            stroke: var(--campus-pine);
+            stroke-width: 4;
+            filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.1));
+        }
+
+        .campus-road {
+            fill: #174226;
+        }
+
+        .campus-road-dashes {
+            stroke: #FFEAA7;
+            stroke-width: 2;
+            stroke-dasharray: 20 22;
+            opacity: .85;
+        }
+
+        .campus-road-label {
+            fill: #FFFFFF;
+            text-anchor: middle;
+            font-size: 15px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        /* Làn đường & Cổng trường */
+        .campus-lane,
+        .campus-turn {
+            fill: none;
+            stroke: var(--campus-wayfinding);
+            stroke-width: 3.5;
+        }
+
+        .campus-gate path {
+            fill: #C91C1C;
+            filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.15));
+        }
+
+        .campus-gate text {
+            fill: #FFFFFF;
+            font-size: 9.5px;
+            font-weight: 700;
+            text-anchor: middle;
+        }
+
+        .campus-gate .campus-gate-two {
+            font-size: 8.5px;
+        }
+
+        /* Tòa nhà */
+        .campus-building rect,
+        .campus-building>path:not(.campus-snowcap):not(.campus-divider) {
+            fill: #1E5631;
+            transition: filter 0.2s ease;
+        }
+
+        .campus-building:hover rect {
+            filter: brightness(1.1);
+        }
+
+        .campus-building.berry rect {
+            fill: #C91C1C;
+        }
+
+        .campus-building.gold rect,
+        .campus-building.gold>path:not(.campus-snowcap):not(.campus-divider) {
+            fill: #D4AC0D;
+        }
+
+        .campus-building-name {
+            fill: #FFFFFF;
+            font-size: 11px;
+            font-weight: 800;
+            text-anchor: middle;
+        }
+
+        .gold .campus-building-name {
+            fill: #1C2833;
+        }
+
+        .campus-note {
+            fill: #F2F3F4;
+            font-size: 8.5px;
+            font-style: italic;
+            font-weight: 600;
+            text-anchor: middle;
+        }
+
+        .gold .campus-note {
+            fill: #1C2833;
+        }
+
+        .campus-divider {
+            stroke: #FFFFFF;
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .campus-snowcap {
+            stroke: #FFFFFF;
+            stroke-width: 3;
+            stroke-linecap: round;
+            opacity: .95;
+            fill: none;
+        }
+
+        /* Gian hàng tương tác */
+        .campus-booth {
+            cursor: pointer;
+            outline: none;
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .campus-booth:hover {
+            transform: scale(1.05);
+        }
+
+        .campus-booth rect {
+            fill: #FFF7D6;
+            stroke: #C91C1C;
+            stroke-width: 1.5;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        }
+
+        .campus-booth-name {
+            fill: #78281F;
+            font-size: 8.5px;
+            font-weight: 700;
+            text-anchor: middle;
+            pointer-events: none;
+        }
+
+        .campus-awning {
+            stroke: #C91C1C;
+            stroke-width: 6;
+            stroke-dasharray: 5 4;
+            pointer-events: none;
+        }
+
+        .campus-booth:hover rect,
+        .campus-booth:focus-visible rect {
+            stroke: #1E5631;
+            stroke-width: 2.5;
+            fill: #FFF2B2;
+        }
+
+        /* Cây thông & Tuyết */
+        .campus-pine>path {
+            fill: #145A32;
+        }
+
+        .campus-pine .campus-tree-snow {
+            fill: none;
+            stroke: #FFFFFF;
+            stroke-width: 1.8;
+        }
+
+        .campus-pine .campus-trunk {
+            stroke: #78281F;
+            stroke-width: 3.5;
+        }
+
+        .campus-tree-bauble {
+            fill: #C91C1C;
+        }
+
+        .campus-snowflakes {
+            fill: #2980B9;
+            font-size: 16px;
+            opacity: .7;
+        }
+
+        /* Dây đèn LED cố định sáng rực quanh khung (Bỏ hoàn toàn hiệu ứng chớp nháy) */
+        .campus-wire {
+            stroke: #117A65;
+            stroke-width: 2.5;
+            fill: none;
+        }
+
+        .campus-bulb {
+            filter: drop-shadow(0 0 4px currentColor);
+            fill: currentColor;
+        }
+
+        .bulb-0 {
+            color: #E74C3C;
+        }
+
+        /* Đỏ */
+        .bulb-1 {
+            color: #F1C40F;
+        }
+
+        /* Vàng */
+        .bulb-2 {
+            color: #5DADE2;
+        }
+
+        /* Xanh dương */
+        .bulb-3 {
+            color: #58D68D;
+        }
+
+        /* Xanh lá */
+
+        .campus-ribbon {
+            fill: #C91C1C;
+            stroke: #F39C12;
+            stroke-width: 0.8;
+        }
+
+        @media (max-width: 767px) {
+            #map-section {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+        }
+    </style>
+
+    <!-- SƠ ĐỒ TRƯỜNG USSH & KHU VỰC GIAN HÀNG TRƯỚC SÂN TÒA E -->
+    <section id="map-section" class="relative z-10 max-w-6xl mx-auto px-6 py-16 border-t border-[#E8E2CD]">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <span
+                class="text-[#C91C1C] font-bold text-xs tracking-widest uppercase bg-red-100 px-3 py-1 rounded-full shadow-sm">
+                SJC Christmas Campus Map
+            </span>
+            <h2 class="text-3xl md:text-4xl font-bold text-stone-800 font-script mt-2">
+                Sơ Đồ Khuôn Viên USSH Mùa Lễ Hội 🎄
+            </h2>
+            <p class="text-stone-600 text-sm mt-2">
+                Các gian hàng Giáng sinh rực rỡ nằm <strong>trước Nhà E</strong>; <strong>Photo Booth</strong> check-in
+                ngay bên trái Nhà C, cạnh Nhà D.
+            </p>
+        </div>
+
+            <!-- Khung bản đồ chuẩn xác -->
+            <div class="campus-scroll bg-gradient-to-b from-[#1E5631] to-[#143D22] p-5 rounded-3xl border-4 border-[#C91C1C] shadow-2xl"
+                tabindex="0" role="region" aria-label="Sơ đồ khuôn viên USSH">
+                <svg class="campus-map" viewBox="0 0 757 480" xmlns="http://www.w3.org/2000/svg"
+                    aria-labelledby="campus-title campus-desc" role="group">
+                    <title id="campus-title">Sơ đồ USSH mùa Giáng sinh</title>
+                    <desc id="campus-desc">Đường Nguyễn Trãi phía trên. Nhà A, A-B, B, B-C, D, canteen và C ở nửa trên.
+                        Nhà E ở giữa nửa dưới, H bên phải. Nhà I và G ở góc dưới trái. Các gian hàng nằm cạnh nhà C và
+                        trước nhà E.</desc>
+
+                    <rect class="campus-paper" x="62" y="20" width="637" height="442" rx="4" />
+                    <rect class="campus-road" x="64" y="22" width="633" height="40" />
+                    <path class="campus-road-dashes" d="M68 40 H275 M490 40 H690" />
+                    <text x="381" y="47" class="campus-road-label">🛣️ ĐƯỜNG NGUYỄN TRÃI</text>
+
+                    <path class="campus-lane" d="M614 68 V274" />
+
+                    <!-- Cổng trường -->
+                    <g class="campus-gate">
+                        <path d="M148 68 H184 V178 H201 L166 299 L131 178 H148 Z" />
+                        <text transform="translate(163 135) rotate(-90)">
+                            <tspan x="0" y="0">CỔNG CHÍNH</tspan>
+                            <tspan x="0" dy="13">336 NGUYỄN TRÃI</tspan>
+                        </text>
+                        <path d="M639 70 H669 V198 H682 L654 267 L625 198 H639 Z" />
+                        <text transform="translate(654 143) rotate(-90)">NGÕ 336 NGUYỄN TRÃI</text>
+                        <path d="M595 276 V286 H652 V306 H595 V316 L551 296 Z" />
+                        <text x="623" y="301" class="campus-gate-two">CỔNG SỐ 2</text>
+                    </g>
+
+                    <!-- Các Tòa Nhà -->
+                    <g class="campus-building pine">
+                        <rect x="307" y="75" width="295" height="28" rx="3" />
+                        <path class="campus-snowcap" d="M310 78 H599" /><text x="454.5" y="93.0"
+                            class="campus-building-name">NHÀ A</text>
+                    </g>
+                    <g class="campus-building pine">
+                        <rect x="527" y="104" width="75" height="52" rx="3" />
+                        <path class="campus-snowcap" d="M530 107 H599" /><text x="564.5" y="134.0"
+                            class="campus-building-name">NHÀ A-B</text>
+                    </g>
+                    <g class="campus-building berry">
+                        <rect x="307" y="158" width="295" height="28" rx="3" />
+                        <path class="campus-snowcap" d="M310 161 H599" /><text x="454.5" y="176.0"
+                            class="campus-building-name">NHÀ B</text>
+                    </g>
+                    <g class="campus-building berry">
+                        <rect x="527" y="188" width="75" height="52" rx="3" />
+                        <path class="campus-snowcap" d="M530 191 H599" /><text x="564.5" y="214.0"
+                            class="campus-building-name">NHÀ B-C</text><text x="564.5" y="231.0"
+                            class="campus-note">(Khu vực thi)</text>
+                    </g>
+                    <g class="campus-building pine">
+                        <rect x="307" y="210" width="57" height="30" rx="3" />
+                        <path class="campus-snowcap" d="M310 213 H361" /><text x="335.5" y="229.0"
+                            class="campus-building-name">NHÀ D</text>
+                    </g>
+                    <g class="campus-building gold">
+                        <rect x="408" y="198" width="75" height="26" rx="3" />
+                        <path class="campus-snowcap" d="M411 201 H480" /><text x="445.5" y="215.0"
+                            class="campus-building-name">CANTEEN</text>
+                    </g>
+                    <g class="campus-building pine">
+                        <rect x="307" y="242" width="295" height="30" rx="3" />
+                        <path class="campus-snowcap" d="M310 245 H599" /><text x="454.5" y="261.0"
+                            class="campus-building-name">NHÀ C (TRUNG TÂM)</text>
+                    </g>
+                    <g class="campus-building berry">
+                        <rect x="307" y="321" width="187" height="63" rx="3" />
+                        <path class="campus-snowcap" d="M310 324 H491" /><text x="400.5" y="356.5"
+                            class="campus-building-name">NHÀ E (SÂN SỰ KIỆN)</text>
+                    </g>
+                    <g class="campus-building pine">
+                        <rect x="539" y="321" width="63" height="105" rx="3" />
+                        <path class="campus-snowcap" d="M542 324 H599" /><text x="570.5" y="377.5"
+                            class="campus-building-name">NHÀ H</text>
+                    </g>
+
+                    <g class="campus-building gold">
+                        <path d="M85 329 H215 V397 H483 V449 H85 Z" />
+                        <path class="campus-divider" d="M145 330 V449" />
+                        <path class="campus-snowcap" d="M88 332 H212 M218 400 H480" />
+                        <text x="115" y="377" class="campus-building-name">NHÀ I</text>
+                        <text x="115" y="392" class="campus-note">(Khu vực</text>
+                        <text x="115" y="406" class="campus-note">thi)</text>
+                        <text x="321" y="420" class="campus-building-name">NHÀ G</text>
+                        <text x="321" y="435" class="campus-note">(Khu vực thi)</text>
+                    </g>
+
+                    <path class="campus-turn" d="M290 185 V198 H320 l-5 -4 m5 4 l-5 4" />
+
+                    <!-- Gian hàng tương tác -->
+                    <g class="campus-booth photobooth" role="button" tabindex="0" aria-label="Photo Booth"
+                        onclick="selectBooth('Photo Booth', 'Ngay bên trái Nhà C, cạnh Nhà D và lối rẽ vào sân E. Check-in góc sống ảo cực chill!', 'photobooth')"
+                        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
+                        <rect x="244" y="230" width="60" height="42" rx="4" />
+                        <path class="campus-awning" d="M244 236 H304" /><text x="274.0" y="255"
+                            class="campus-booth-name">Photo Booth</text>
+                    </g>
+                    <g class="campus-booth cafe" role="button" tabindex="0" aria-label="Christmas Café"
+                        onclick="selectBooth('Christmas Café', 'Trước Nhà E, ngay bên dưới Nhà C. Phục vụ cacao nóng và trà quế thơm lừng!', 'cafe')"
+                        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
+                        <rect x="327" y="274" width="54" height="38" rx="4" />
+                        <path class="campus-awning" d="M327 280 H381" /><text x="354.0" y="292"
+                            class="campus-booth-name">Christmas</text><text x="354.0" y="303"
+                            class="campus-booth-name">Café</text>
+                    </g>
+                    <g class="campus-booth bakery" role="button" tabindex="0" aria-label="Christmas Bakery"
+                        onclick="selectBooth('Christmas Bakery', 'Giữa Christmas Café và Workshop Booth, trước Nhà E. Trạm bánh gừng ngọt ngào.', 'bakery')"
+                        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
+                        <rect x="396" y="274" width="53" height="38" rx="4" />
+                        <path class="campus-awning" d="M396 280 H449" /><text x="422.5" y="292"
+                            class="campus-booth-name">Christmas</text><text x="422.5" y="303"
+                            class="campus-booth-name">Bakery</text>
+                    </g>
+                    <g class="campus-booth workshop" role="button" tabindex="0" aria-label="Workshop Booth"
+                        onclick="selectBooth('Workshop Booth', 'Bên phải Christmas Bakery, trước Nhà E. Gấp giấy, làm ornament và thiệp độc bản.', 'workshop')"
+                        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
+                        <rect x="470" y="274" width="53" height="38" rx="4" />
+                        <path class="campus-awning" d="M470 280 H523" /><text x="496.5" y="292"
+                            class="campus-booth-name">Workshop</text><text x="496.5" y="303"
+                            class="campus-booth-name">Booth</text>
+                    </g>
+                    <g class="campus-booth music" role="button" tabindex="0" aria-label="Music Corner"
+                        onclick="selectBooth('Music Corner', 'Bên trái Nhà E, phía dưới Photo Booth. Thưởng thức âm nhạc acoustic mùa đông.', 'music')"
+                        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
+                        <rect x="239" y="313" width="60" height="38" rx="4" />
+                        <path class="campus-awning" d="M239 319 H299" /><text x="269.0" y="331"
+                            class="campus-booth-name">Music</text><text x="269.0" y="342"
+                            class="campus-booth-name">Corner</text>
+                    </g>
+
+                    <!-- Cây thông trang trí & Tuyết -->
+                    <g class="campus-pine" transform="translate(248 92) scale(1)" aria-hidden="true">
+                        <path d="M0 -23 L-14 0 H-8 L-19 15 H19 L8 0 H14 Z" />
+                        <path class="campus-tree-snow" d="M-7 -12 L0 -23 L7 -12 M-13 6 L-19 15 H19 L13 6" />
+                        <path class="campus-trunk" d="M0 15 V24" />
+                        <circle class="campus-tree-bauble" cx="-6" cy="2" r="3" />
+                        <circle class="campus-tree-bauble" cx="8" cy="11" r="3" />
+                    </g>
+                    <g class="campus-pine" transform="translate(237 161) scale(0.7)" aria-hidden="true">
+                        <path d="M0 -23 L-14 0 H-8 L-19 15 H19 L8 0 H14 Z" />
+                        <path class="campus-tree-snow" d="M-7 -12 L0 -23 L7 -12 M-13 6 L-19 15 H19 L13 6" />
+                        <path class="campus-trunk" d="M0 15 V24" />
+                        <circle class="campus-tree-bauble" cx="-6" cy="2" r="3" />
+                        <circle class="campus-tree-bauble" cx="8" cy="11" r="3" />
+                    </g>
+                    <g class="campus-pine" transform="translate(508 354) scale(0.7)" aria-hidden="true">
+                        <path d="M0 -23 L-14 0 H-8 L-19 15 H19 L8 0 H14 Z" />
+                        <path class="campus-tree-snow" d="M-7 -12 L0 -23 L7 -12 M-13 6 L-19 15 H19 L13 6" />
+                        <path class="campus-trunk" d="M0 15 V24" />
+                        <circle class="campus-tree-bauble" cx="-6" cy="2" r="3" />
+                        <circle class="campus-tree-bauble" cx="8" cy="11" r="3" />
+                    </g>
+                    <g class="campus-pine" transform="translate(645 390) scale(1)" aria-hidden="true">
+                        <path d="M0 -23 L-14 0 H-8 L-19 15 H19 L8 0 H14 Z" />
+                        <path class="campus-tree-snow" d="M-7 -12 L0 -23 L7 -12 M-13 6 L-19 15 H19 L13 6" />
+                        <path class="campus-trunk" d="M0 15 V24" />
+                        <circle class="campus-tree-bauble" cx="-6" cy="2" r="3" />
+                        <circle class="campus-tree-bauble" cx="8" cy="11" r="3" />
+                    </g>
+
+                    <g class="campus-snowflakes" aria-hidden="true">
+                        <text x="265" y="367">❄️</text><text x="509" y="131">✨</text><text x="100"
+                            y="110">❄️</text><text x="649" y="342">✨</text>
+                    </g>
+
+                    <!-- Dây đèn LED cố định sáng rực quanh mép khung bản đồ -->
+                    <g aria-hidden="true" class="campus-string">
+                        <path class="campus-wire" d="M64 22 H697 V462 H64 Z" />
+                        <!-- Các bóng đèn cố định sắc màu -->
+                        <circle cx="64.0" cy="22.0" r="3.2" class="campus-bulb bulb-0" />
+                        <circle cx="95.0" cy="22.0" r="3.2" class="campus-bulb bulb-1" />
+                        <circle cx="126.0" cy="22.0" r="3.2" class="campus-bulb bulb-2" />
+                        <circle cx="157.0" cy="22.0" r="3.2" class="campus-bulb bulb-3" />
+                        <circle cx="188.0" cy="22.0" r="3.2" class="campus-bulb bulb-0" />
+                        <circle cx="219.0" cy="22.0" r="3.2" class="campus-bulb bulb-1" />
+                        <circle cx="250.0" cy="22.0" r="3.2" class="campus-bulb bulb-2" />
+                        <circle cx="281.0" cy="22.0" r="3.2" class="campus-bulb bulb-3" />
+                        <circle cx="312.0" cy="22.0" r="3.2" class="campus-bulb bulb-0" />
+                        <circle cx="343.0" cy="22.0" r="3.2" class="campus-bulb bulb-1" />
+                        <circle cx="374.0" cy="22.0" r="3.2" class="campus-bulb bulb-2" />
+                        <circle cx="405.0" cy="22.0" r="3.2" class="campus-bulb bulb-3" />
+                        <circle cx="436.0" cy="22.0" r="3.2" class="campus-bulb bulb-0" />
+                        <circle cx="467.0" cy="22.0" r="3.2" class="campus-bulb bulb-1" />
+                        <circle cx="498.0" cy="22.0" r="3.2" class="campus-bulb bulb-2" />
+                        <circle cx="529.0" cy="22.0" r="3.2" class="campus-bulb bulb-3" />
+                        <circle cx="560.0" cy="22.0" r="3.2" class="campus-bulb bulb-0" />
+                        <circle cx="591.0" cy="22.0" r="3.2" class="campus-bulb bulb-1" />
+                        <circle cx="622.0" cy="22.0" r="3.2" class="campus-bulb bulb-2" />
+                        <circle cx="653.0" cy="22.0" r="3.2" class="campus-bulb bulb-3" />
+                        <circle cx="697.0" cy="22.0" r="3.2" class="campus-bulb bulb-0" />
+
+                        <circle cx="697.0" cy="52.0" r="3.2" class="campus-bulb bulb-1" />
+                        <circle cx="697.0" cy="82.0" r="3.2" class="campus-bulb bulb-2" />
+                        <circle cx="697.0" cy="112.0" r="3.2" class="campus-bulb bulb-3" />
+                        <circle cx="697.0" cy="142.0" r="3.2" class="campus-bulb bulb-0" />
+                        <circle cx="697.0" cy="172.0" r="3.2" class="campus-bulb bulb-1" />
+                        <circle cx="697.0" cy="202.0" r="3.2" class="campus-bulb bulb-2" />
+                        <circle cx="697.0" cy="232.0" r="3.2" class="campus-bulb bulb-3" />
+                        <circle cx="697.0" cy="262.0" r="3.2" class="campus-bulb bulb-0" />
+                        <circle cx="697.0" cy="292.0" r="3.2" class="campus-bulb bulb-1" />
+                        <circle cx="697.0" cy="322.0" r="3.2" class="campus-bulb bulb-2" />
+                        <circle cx="697.0" cy="352.0" r="3.2" class="campus-bulb bulb-3" />
+                        <circle cx="697.0" cy="382.0" r="3.2" class="campus-bulb bulb-0" />
+                        <circle cx="697.0" cy="412.0" r="3.2" class="campus-bulb bulb-1" />
+                        <circle cx="697.0" cy="442.0" r="3.2" class="campus-bulb bulb-2" />
+                        <circle cx="697.0" cy="462.0" r="3.2" class="campus-bulb bulb-3" />
+
+                        <circle cx="666.0" cy="462.0" r="3.2" class="campus-bulb bulb-0" />
+                        <circle cx="635.0" cy="462.0" r="3.2" class="campus-bulb bulb-1" />
+                        <circle cx="604.0" cy="462.0" r="3.2" class="campus-bulb bulb-2" />
+                        <circle cx="573.0" cy="462.0" r="3.2" class="campus-bulb bulb-3" />
+                        <circle cx="542.0" cy="462.0" r="3.2" class="campus-bulb bulb-0" />
+                        <circle cx="511.0" cy="462.0" r="3.2" class="campus-bulb bulb-1" />
+                        <circle cx="480.0" cy="462.0" r="3.2" class="campus-bulb bulb-2" />
+                        <circle cx="449.0" cy="462.0" r="3.2" class="campus-bulb bulb-3" />
+                        <circle cx="418.0" cy="462.0" r="3.2" class="campus-bulb bulb-0" />
+                        <circle cx="387.0" cy="462.0" r="3.2" class="campus-bulb bulb-1" />
+                        <circle cx="356.0" cy="462.0" r="3.2" class="campus-bulb bulb-2" />
+                        <circle cx="325.0" cy="462.0" r="3.2" class="campus-bulb bulb-3" />
+                        <circle cx="294.0" cy="462.0" r="3.2" class="campus-bulb bulb-0" />
+                        <circle cx="263.0" cy="462.0" r="3.2" class="campus-bulb bulb-1" />
+                        <circle cx="232.0" cy="462.0" r="3.2" class="campus-bulb bulb-2" />
+                        <circle cx="201.0" cy="462.0" r="3.2" class="campus-bulb bulb-3" />
+                        <circle cx="170.0" cy="462.0" r="3.2" class="campus-bulb bulb-0" />
+                        <circle cx="139.0" cy="462.0" r="3.2" class="campus-bulb bulb-1" />
+                        <circle cx="108.0" cy="462.0" r="3.2" class="campus-bulb bulb-2" />
+                        <circle cx="77.0" cy="462.0" r="3.2" class="campus-bulb bulb-3" />
+                        <circle cx="64.0" cy="462.0" r="3.2" class="campus-bulb bulb-0" />
+
+                        <circle cx="64.0" cy="432.0" r="3.2" class="campus-bulb bulb-1" />
+                        <circle cx="64.0" cy="402.0" r="3.2" class="campus-bulb bulb-2" />
+                        <circle cx="64.0" cy="372.0" r="3.2" class="campus-bulb bulb-3" />
+                        <circle cx="64.0" cy="342.0" r="3.2" class="campus-bulb bulb-0" />
+                        <circle cx="64.0" cy="312.0" r="3.2" class="campus-bulb bulb-1" />
+                        <circle cx="64.0" cy="282.0" r="3.2" class="campus-bulb bulb-2" />
+                        <circle cx="64.0" cy="252.0" r="3.2" class="campus-bulb bulb-3" />
+                        <circle cx="64.0" cy="222.0" r="3.2" class="campus-bulb bulb-0" />
+                        <circle cx="64.0" cy="192.0" r="3.2" class="campus-bulb bulb-1" />
+                        <circle cx="64.0" cy="162.0" r="3.2" class="campus-bulb bulb-2" />
+                        <circle cx="64.0" cy="132.0" r="3.2" class="campus-bulb bulb-3" />
+                        <circle cx="64.0" cy="102.0" r="3.2" class="campus-bulb bulb-0" />
+                        <circle cx="64.0" cy="72.0" r="3.2" class="campus-bulb bulb-1" />
+                        <circle cx="64.0" cy="42.0" r="3.2" class="campus-bulb bulb-2" />
+                    </g>
+
+                    <!-- Nơ đỏ trang trí đỉnh bản đồ -->
+                    <g class="campus-ribbon" aria-hidden="true">
+                        <path
+                            d="M381 23 Q358 3 354 18 Q357 32 381 23 Q404 3 408 18 Q405 32 381 23 M378 24 l-8 13 10 -4 3 5 3 -14 3 14 3 -5 10 4 -9 -13" />
+                        <circle cx="381" cy="23" r="3.5" fill="#F1C40F" />
+                    </g>
+                </svg>
+            </div>
+
+            <!-- Bảng thông tin booth khi click -->
+            <div id="booth-info-box"
+                class="mt-6 bg-white p-5 rounded-2xl border-2 border-[#1E5631] hidden flex flex-col md:flex-row items-center justify-between gap-4 shadow-lg">
+                <div>
+                    <span class="text-xs font-bold text-[#C91C1C] uppercase tracking-wider" id="booth-title">Gian
+                        Hàng</span>
+                    <p class="text-stone-700 text-sm mt-1" id="booth-desc">Mô tả vị trí gian hàng.</p>
+                </div>
+                <button onclick="startNavigation()"
+                    class="bg-[#1E5631] hover:bg-green-800 text-white font-bold px-6 py-2.5 rounded-xl text-xs whitespace-nowrap shadow-md transition-all transform hover:scale-105">
+                    🧭 Chỉ Đường Ngay
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        if (typeof window.selectBooth === 'undefined') {
+            window.selectBooth = function (title, desc) {
+                document.getElementById("booth-title").textContent = title;
+                document.getElementById("booth-desc").textContent = desc;
+                document.getElementById("booth-info-box").classList.remove("hidden");
+            };
+        }
+        if (typeof window.startNavigation === 'undefined') {
+            window.startNavigation = function () {
+                var start = document.getElementById("startPoint").value;
+                var booth = document.getElementById("booth-title").textContent;
+                var msg = "🧭 Đang chỉ đường từ " + start.toUpperCase() + " đến " + booth + " tại sân trước tòa E!";
+                if (window.showToast) {window.showToast(msg);}
+                else {alert(msg);}
+            };
+        }
+    </script>
+    <!-- FORM ĐĂNG KÝ NHẬN QUÀ -->
+    <section class="relative z-10 max-w-3xl mx-auto px-6 py-16 border-t border-[#E8E2CD]">
+        <div id="register-form" class="vintage-card rounded-3xl p-8 md:p-12 bg-white shadow-xl relative">
+            <div class="text-center max-w-xl mx-auto mb-8">
+                <span class="text-[#C91C1C] font-bold text-xs tracking-widest uppercase">Đăng ký giữ chỗ</span>
+                <h2 class="text-3xl font-bold text-stone-800 font-script mt-1">Nhận Hộp Quà Giáng Sinh</h2>
+                <p class="text-stone-600 text-sm mt-2">
+                    Điền thông tin bên dưới để Ban tổ chức ghi nhận và gửi hộp quà đặc biệt đến bạn nhé!
+                </p>
+            </div>
+
+            <form id="giftRegistrationForm" onsubmit="handleFormSubmit(event)" class="space-y-5">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-bold text-stone-700 uppercase">Họ và tên</label>
+                        <input type="text" id="fullName" required
+                            class="w-full bg-[#FBF9F1] border border-stone-300 rounded-xl px-4 py-3 text-stone-800 text-sm focus:outline-none focus:border-[#C91C1C]"
+                            placeholder="Tên của bạn">
+                    </div>
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-bold text-stone-700 uppercase">Số điện thoại</label>
+                        <input type="tel" id="phone" required
+                            class="w-full bg-[#FBF9F1] border border-stone-300 rounded-xl px-4 py-3 text-stone-800 text-sm focus:outline-none focus:border-[#C91C1C]"
+                            placeholder="0912 345 xxx">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-bold text-stone-700 uppercase">Mã sinh viên</label>
+                        <input type="text" id="code" required
+                            class="w-full bg-[#FBF9F1] border border-stone-300 rounded-xl px-4 py-3 text-stone-800 text-sm focus:outline-none focus:border-[#C91C1C]"
+                            placeholder="Mã sinh viên">
+                    </div>
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-bold text-stone-700 uppercase">Khoa</label>
+                        <input type="text" id="department" required
+                            class="w-full bg-[#FBF9F1] border border-stone-300 rounded-xl px-4 py-3 text-stone-800 text-sm focus:outline-none focus:border-[#C91C1C]"
+                            placeholder="Khoa">
+                    </div>
+                </div>
+
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-bold text-stone-700 uppercase">Email liên hệ</label>
+                    <input type="email" id="email" required
+                        class="w-full bg-[#FBF9F1] border border-stone-300 rounded-xl px-4 py-3 text-stone-800 text-sm focus:outline-none focus:border-[#C91C1C]"
+                        placeholder="example@gmail.com">
+                </div>
+
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-bold text-stone-700 uppercase">Lời chúc hoặc góp ý (Tùy
+                        chọn)</label>
+                    <textarea id="message" rows="3"
+                        class="w-full bg-[#FBF9F1] border border-stone-300 rounded-xl px-4 py-3 text-stone-800 text-sm focus:outline-none focus:border-[#C91C1C] resize-none"
+                        placeholder="Gửi gắm thông điệp mùa lễ hội..."></textarea>
+                </div>
+
+                <button type="submit"
+                    class="w-full bg-[#C91C1C] hover:bg-red-700 text-white font-bold py-3.5 rounded-xl shadow-lg transition-all text-sm tracking-wide">
+                    GỬI ĐĂNG KÝ NGAY 🎁
+                </button>
+            </form>
+        </div>
+    </section>
+    <!-- FOOTER -->
+    <footer class="relative z-10 bg-[#26221E] text-stone-400 py-12 px-6 border-t border-stone-800">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center mb-8">
+            <div class="space-y-3">
+                <div class="flex items-center gap-3">
+                    <img src="ussh-logo.png" alt="USSH Logo" class="w-7 h-7 object-contain">
+                    <img src="sjc-logo.png" alt="SJC Logo" class="h-5 object-contain brightness-200">
+                </div>
+                <p class="text-xs leading-relaxed text-stone-400">
+                    Trường Đại học Khoa học Xã hội và Nhân văn - VNU<br>
+                    <strong class="text-stone-200">Viện Đào tạo Báo chí và Truyền thông</strong>
+                </p>
+            </div>
+            <div class="space-y-2 text-sm">
+                <h4 class="text-stone-200 font-semibold mb-2">Liên kết nhanh</h4>
+                <ul class="space-y-1.5 text-xs">
+                    <li><a href="#tree-section" class="hover:text-red-400 transition-colors">Cây thông lời chúc</a></li>
+                    <li><a href="#forest-section" class="hover:text-red-400 transition-colors">Khu rừng Giáng Sinh</a>
+                    </li>
+                    <li><a href="#gift-box" class="hover:text-red-400 transition-colors">Hộp quà đặc biệt
+                            (22.5x15.7x6cm)</a></li>
+                </ul>
+            </div>
+            <div class="space-y-2">
+                <h4 class="text-stone-200 font-semibold text-sm">Kết nối chính thức</h4>
+                <p class="text-xs text-stone-400">Theo dõi các kênh truyền thông để cập nhật sự kiện mới nhất.</p>
+                <div class="flex gap-3 pt-1">
+                    <a href="#"
+                        class="w-8 h-8 rounded-full bg-stone-800 flex items-center justify-center hover:bg-[#C91C1C] hover:text-white transition-all text-xs font-bold text-stone-300">FB</a>
+                    <a href="#"
+                        class="w-8 h-8 rounded-full bg-stone-800 flex items-center justify-center hover:bg-[#C91C1C] hover:text-white transition-all text-xs font-bold text-stone-300">IG</a>
+                    <a href="#"
+                        class="w-8 h-8 rounded-full bg-stone-800 flex items-center justify-center hover:bg-[#C91C1C] hover:text-white transition-all text-xs font-bold text-stone-300">TT</a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto pt-6 border-t border-stone-800 text-center text-[11px] text-stone-500">
+            <p>&copy; 2026 SJC Campaign. All rights reserved. Designed with passion by Viện Đào tạo Báo chí và Truyền
+                thông - USSH, VNU.</p>
+        </div>
+    </footer>
+
+    <!-- CHRISTMAS MUSIC CASSETTE PLAYER (TÍCH HỢP NHẠC THẬT) -->
+    <div id="cassette-player"
+        class="fixed bottom-6 right-6 z-50 bg-[#2C241D] text-amber-100 p-4 rounded-2xl shadow-2xl border-2 border-amber-900 w-80 backdrop-blur-md transition-all duration-300">
+        
+        <!-- Thẻ Audio ẩn -->
+        <audio id="audio-element" preload="metadata"></audio>
+
+        <div class="flex items-center justify-between mb-3 border-b border-amber-900/60 pb-2">
+            <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse" id="player-status-dot"></span>
+                <span class="text-[11px] font-bold tracking-wider uppercase text-amber-400">♫ SJC Cassette Player</span>
+            </div>
+            <button onclick="togglePlayerMinimize()" class="text-xs text-amber-300 hover:text-white transition-colors">Thu nhỏ</button>
+        </div>
+
+        <div id="player-body" class="space-y-3">
+            <div class="bg-[#1C1612] rounded-xl p-3 border border-amber-900/50 flex items-center justify-between relative overflow-hidden">
+                <div class="absolute inset-0 bg-amber-500/5 pointer-events-none"></div>
+                <!-- Bánh răng Cassette trái -->
+                <div class="w-10 h-10 rounded-full border-2 border-amber-700 bg-stone-900 flex items-center justify-center cassette-wheel">
+                    <div class="w-3 h-3 bg-amber-500 rounded-full"></div>
+                </div>
+                <div class="text-center px-2 z-10 w-full overflow-hidden">
+                    <div id="current-song" class="text-xs font-bold text-amber-200 truncate w-full">Jingle Bells - Lofi</div>
+                    <div id="current-artist" class="text-[10px] text-stone-400 truncate">Christmas Playlist</div>
+                </div>
+                <!-- Bánh răng Cassette phải -->
+                <div class="w-10 h-10 rounded-full border-2 border-amber-700 bg-stone-900 flex items-center justify-center cassette-wheel">
+                    <div class="w-3 h-3 bg-amber-500 rounded-full"></div>
+                </div>
+            </div>
+
+            <div class="space-y-1">
+                <!-- Thanh tiến trình (Có thể click để tua) -->
+                <div id="progress-container" class="w-full bg-stone-800 h-1.5 rounded-full overflow-hidden cursor-pointer relative" onclick="seekSong(event)">
+                    <div id="progress-bar" class="bg-amber-500 h-full w-0 transition-all duration-100 pointer-events-none"></div>
+                </div>
+                
+                <!-- Các nút điều khiển -->
+                <div class="flex justify-between items-center pt-2">
+                    <button onclick="prevSong()" class="text-stone-400 hover:text-white text-xs font-bold px-2">⏮ Prev</button>
+                    <button id="play-btn" onclick="togglePlay()"
+                        class="bg-amber-600 hover:bg-amber-500 text-stone-950 font-bold px-5 py-1.5 rounded-lg text-xs shadow-md transition-colors w-20 text-center">
+                        ▶ Play
+                    </button>
+                    <button onclick="nextSong()" class="text-stone-400 hover:text-white text-xs font-bold px-2">Next ⏭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODALS -->
+    <div id="wishModal"
+        class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden backdrop-blur-sm">
+        <div class="bg-white rounded-3xl p-6 md:p-8 max-w-md w-full shadow-2xl relative border-2 border-stone-200">
+            <div class="text-center"><span id="modalOrnament" class="modal-ornament">🎄</span></div>
+            <h3 class="text-lg font-bold text-stone-800 font-script mb-2 text-center">Lời Chúc Từ Bạn Bè</h3>
+            <p id="modalWishText"
+                class="text-stone-700 text-base italic bg-[#FBF9F1] p-4 rounded-xl border border-stone-200 my-3">"Nội
+                dung lời chúc..."</p>
+            <div class="text-right text-xs font-bold text-[#C91C1C] mb-6" id="modalSender">— Người gửi</div>
+            <button onclick="closeWishModal()"
+                class="w-full bg-stone-900 text-white font-bold py-2.5 rounded-xl text-xs">Đóng Lại</button>
+        </div>
+    </div>
+
+    <div id="customizerModal"
+        class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden backdrop-blur-sm">
+        <div
+            class="bg-white rounded-3xl p-6 md:p-8 max-w-md w-full shadow-2xl relative border-2 border-stone-200 space-y-4">
+            <h3 class="text-xl font-bold text-stone-800 font-script">🎨 Tùy Chỉnh Digital Identity</h3>
+            <div>
+                <label class="block text-xs font-bold text-stone-700 uppercase mb-1">Tên Chủ Nhân Cây Thông</label>
+                <input type="text" id="inputOwnerName" value="Tên của bạn"
+                    class="w-full bg-[#FBF9F1] border border-stone-300 rounded-xl px-3 py-2 text-sm text-stone-800">
+            </div>
+            <div class="flex gap-3 pt-2">
+                <button onclick="saveCustomization()"
+                    class="flex-1 bg-[#1E5631] hover:bg-green-800 text-white font-bold py-2.5 rounded-xl text-xs">Lưu
+                    Thay Đổi</button>
+                <button onclick="closeCustomizerModal()"
+                    class="flex-1 bg-stone-200 hover:bg-stone-300 text-stone-800 font-bold py-2.5 rounded-xl text-xs">Hủy</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="videoModal"
+        class="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4 hidden backdrop-blur-sm">
+        <div class="bg-white rounded-3xl p-6 max-w-2xl w-full shadow-2xl relative space-y-4">
+            <div class="flex justify-between items-center">
+                <h3 id="videoModalTitle" class="font-bold text-stone-800 text-lg">Tutorial</h3>
+                <button onclick="closeVideoModal()" class="text-stone-500 hover:text-stone-900 font-bold">✕</button>
+            </div>
+            <div
+                class="w-full aspect-video bg-stone-900 rounded-2xl overflow-hidden flex items-center justify-center text-white">
+                <div class="text-center p-6">
+                    <span class="text-4xl">▶️</span>
+                    <p class="text-xs text-stone-400 mt-2">Đang phát video hướng dẫn chi tiết từ SJC Workshop...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast"
+        class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-stone-900 text-white px-6 py-3 rounded-xl shadow-2xl font-medium text-sm transition-all duration-300 transform translate-y-20 opacity-0 z-50 flex items-center gap-3 border border-stone-700">
+        <span class="text-xl">🔔</span>
+        <span id="toast-message">Thông báo</span>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC TÍCH HỢP FIREBASE & ĐỒ HỌA MỚI -->
+    <script type="module">
+        import {initializeApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import {getFirestore, doc, setDoc, getDoc, updateDoc, arrayUnion} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // 1. CẤU HÌNH FIREBASE CỦA BẠN
+        const firebaseConfig = {
+            apiKey: "AIzaSyD-0-aCycN3uIz8MtcnqpQfaQl2DwIc4sM",
+            authDomain: "sjc-christmas-tree.firebaseapp.com",
+            projectId: "sjc-christmas-tree",
+            storageBucket: "sjc-christmas-tree.firebasestorage.app",
+            messagingSenderId: "667748924402",
+            appId: "1:667748924402:web:71aa4563311aee19c5c96b"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // 2. ĐỌC ID CÂY TỪ LINK
+        const urlParams = new URLSearchParams(window.location.search);
+        let currentTreeId = urlParams.get('tree');
+
+        // 3. TẢI DỮ LIỆU CÂY TỪ FIREBASE
+        async function loadTreeData() {
+            if (!currentTreeId) return;
+
+            const treeRef = doc(db, "trees", currentTreeId);
+            const treeSnap = await getDoc(treeRef);
+
+            if (treeSnap.exists()) {
+                const data = treeSnap.data();
+                document.getElementById('owner-display').textContent = data.ownerName;
+
+                const wishes = data.wishes || [];
+                document.getElementById('wish-count').textContent = wishes.length;
+                document.getElementById('forest-my-count').textContent = wishes.length;
+
+                // Xóa các ornament tĩnh (mẫu) đi để nạp dữ liệu thật
+                const container = document.getElementById('dynamic-ornaments-container');
+                container.innerHTML = '';
+
+                wishes.forEach(wish => {
+                    renderOrnament(wish.sender, wish.message, wish.type);
+                });
+            } else {
+                window.showToast("Cây này chưa tồn tại! Hãy tạo cây mới.");
+            }
+        }
+        loadTreeData();
+
+        // 4. HÀM VẼ QUẢ CHÂU (Dựa trên đồ họa mới của bạn)
+        const EMOJI_ORNAMENTS = {gift: '🎁', bell: '🔔', star: '⭐', candy: '🍭', snow: '❄️', heart: '💖', cookie: '🍪'};
+        const BALL_ORNAMENTS = ['red', 'gold', 'blue', 'pink', 'silver'];
+        // Chọn vị trí nằm trong hình tam giác của tán cây, tránh chồng lên quả châu khác
+        function pickTreePosition() {
+            const container = document.getElementById('dynamic-ornaments-container');
+            const taken = [...container.querySelectorAll('.tree-ornament')].map(o => [parseFloat(o.style.left), parseFloat(o.style.top)]);
+            let best = null, bestDist = -1;
+            for (let i = 0; i < 40; i++) {
+                const y = 85 + Math.random() * 190;                 // toạ độ SVG
+                const half = ((y - 26) / 264) * 118 * 0.82;          // nửa bề rộng tán lá tại y
+                const x = 180 + (Math.random() * 2 - 1) * half;
+                const left = ((15 + x - 13.5) / 390) * 100;
+                const top = ((14 + y - 13.5) / 410) * 100;
+                const d = taken.length ? Math.min(...taken.map(([l, t]) => Math.hypot(l - left, (t - top) * 0.95))) : 99;
+                if (d > bestDist) {bestDist = d; best = [left, top];}
+            }
+            return best;
+        }
+        function renderOrnament(sender, message, type, isNew = false) {
+            const container = document.getElementById('dynamic-ornaments-container');
+            const el = document.createElement('button');
+            const [left, top] = pickTreePosition();
+            el.type = 'button';
+            if (EMOJI_ORNAMENTS[type]) {el.className = 'tree-ornament emoji'; el.textContent = EMOJI_ORNAMENTS[type];}
+            else el.className = `tree-ornament ${BALL_ORNAMENTS.includes(type) ? type : 'red'}`;
+            if (isNew) el.classList.add('is-new');
+            el.dataset.type = type;
+            el.style.left = `${left}%`;
+            el.style.top = `${top}%`;
+            el.title = `Lời chúc từ ${sender}`;
+            el.setAttribute('aria-label', `Đọc lời chúc từ ${sender}`);
+            el.onclick = () => window.openWishModal(message, sender, type);
+            container.appendChild(el);
+            if (isNew) {setTimeout(() => el.classList.remove('is-new'), 1000); window.burstConfetti(left, top);}
+        }
+        window.renderOrnament = renderOrnament;
+
+        // 5. GỬI LỜI CHÚC LÊN FIREBASE
+        window.handleSendWish = async function (event) {
+            event.preventDefault();
+            if (!currentTreeId) {
+                window.showToast("Chưa có cây thông! Hãy bấm 'Tùy Chỉnh' để tạo cây trước.");
+                return;
+            }
+
+            const btn = event.target.querySelector('button[type="submit"]');
+            btn.textContent = "⏳ Đang treo lời chúc...";
+
+            const sender = document.getElementById('senderName').value;
+            const message = document.getElementById('wishMessage').value;
+            const type = document.querySelector('input[name="ornamentType"]:checked').value;
+
+            try {
+                const treeRef = doc(db, "trees", currentTreeId);
+                await updateDoc(treeRef, {wishes: arrayUnion({sender, message, type})});
+
+                renderOrnament(sender, message, type, true);
+                let currentCount = parseInt(document.getElementById('wish-count').textContent) || 0;
+                document.getElementById('wish-count').textContent = currentCount + 1;
+                document.getElementById('forest-my-count').textContent = currentCount + 1;
+
+                window.showToast(`🎉 Đã treo thành công lời chúc của ${sender} lên cây!`);
+                document.getElementById('sendWishForm').reset();
+                document.getElementById('wish-chars').textContent = '0';
+            } catch (error) {
+                window.showToast("Lỗi: Không tìm thấy cây thông này. Hãy khởi tạo cây trước.");
+            }
+            btn.textContent = "✨ Treo Lời Chúc Lên Cây";
+        };
+
+        // 6. KHỞI TẠO CÂY MỚI LÊN FIREBASE
+        window.saveCustomization = async function () {
+            const ownerName = document.getElementById('inputOwnerName').value;
+            if (!ownerName) return;
+            // Tạo ID đường link (vd: "Phuong Cuc" -> "phuong-cuc")
+            const newTreeId = ownerName.toLowerCase().replace(/ /g, '-').replace(/[^\w-]/g, '');
+
+            try {
+                await setDoc(doc(db, "trees", newTreeId), {ownerName: ownerName, wishes: []});
+                window.showToast('✨ Đang tạo Cây Thông cho bạn...');
+                window.closeCustomizerModal();
+                setTimeout(() => {window.location.href = window.location.pathname + "?tree=" + newTreeId;}, 1000);
+            } catch (error) {
+                window.showToast("Có lỗi xảy ra khi tạo cây.");
+            }
+        };
+
+        window.shareTreeLink = function () {
+            if (!currentTreeId) {window.showToast("Hãy tạo cây trước khi chia sẻ!"); return;}
+            navigator.clipboard.writeText(window.location.href);
+            window.showToast('🔗 Đã copy Link! Gửi cho bạn bè ngay.');
+        };
+
+        // --- CÁC HÀM GIAO DIỆN GỐC ---
+        window.showToast = function (message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').textContent = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3500);
+        };
+
+        window.openWishModal = function (text, sender, type) {
+            const icons = {red: '🔴', gold: '🟡', blue: '🔵', pink: '🩷', silver: '⚪', gift: '🎁', bell: '🔔', star: '⭐', candy: '🍭', snow: '❄️', heart: '💖', cookie: '🍪'};
+            document.getElementById('modalOrnament').textContent = icons[type] || '🎄';
+            document.getElementById('modalWishText').textContent = `"${text}"`;
+            document.getElementById('modalSender').textContent = `— ${sender}`;
+            document.getElementById('wishModal').classList.remove('hidden');
+        };
+        window.closeWishModal = function () {document.getElementById('wishModal').classList.add('hidden');}
+        window.openCustomizerModal = function () {document.getElementById('customizerModal').classList.remove('hidden');}
+        window.closeCustomizerModal = function () {document.getElementById('customizerModal').classList.add('hidden');}
+        window.openVideoModal = function (title) {
+            document.getElementById('videoModalTitle').textContent = title;
+            document.getElementById('videoModal').classList.remove('hidden');
+        }
+        window.closeVideoModal = function () {document.getElementById('videoModal').classList.add('hidden');}
+        window.selectBooth = function (title, desc) {
+            document.getElementById('booth-title').textContent = title;
+            document.getElementById('booth-desc').textContent = desc;
+            document.getElementById('booth-info-box').classList.remove('hidden');
+        }
+        window.startNavigation = function () {
+            const start = document.getElementById('startPoint').value;
+            const booth = document.getElementById('booth-title').textContent;
+            window.showToast(`🧭 Đang chỉ đường từ ${start.toUpperCase()} đến ${booth} tại sân trước tòa E!`);
+        }
+
+        // ==========================================
+        // MUSIC PLAYER LOGIC (TÍCH HỢP AUDIO THẬT)
+        // ==========================================
+        const audioEl = document.getElementById('audio-element');
+        const playBtn = document.getElementById('play-btn');
+        const playerEl = document.getElementById('cassette-player');
+        const progressBar = document.getElementById('progress-bar');
+        
+        let isPlaying = false;
+        let currentSongIndex = 0;
+
+        // Danh sách nhạc (đã gắn link mp3 miễn phí chất lượng cao mùa Giáng sinh)
+        // Bạn có thể thay "src" bằng link file nhạc cục bộ của bạn (vd: "music/jingle.mp3")
+        const playlist = [
+            {
+                title: "SJC - ONE FAMILY", 
+                artist: "TOWNSHIP",
+                src: "jingle-bells.mp3"
+            },
+            {
+                title: "GIÁNG SINH GẦN SJC", 
+                artist: "TOWNSHIP",
+                src: "last-christmas.mp3"
+            },
+            
+               
+        
+        ];
+
+        // Tải thông tin bài hát vào UI và thẻ Audio
+        function loadSong(index) {
+            const song = playlist[index];
+            document.getElementById('current-song').textContent = song.title;
+            document.getElementById('current-artist').textContent = song.artist;
+            audioEl.src = song.src;
+        }
+
+        // Khởi tạo bài hát đầu tiên khi tải trang (nhưng chưa phát)
+        loadSong(currentSongIndex);
+function tryAutoplay() {
+            if (!isPlaying && audioEl.paused) {
+                audioEl.play().then(() => {
+                    isPlaying = true;
+                    playerEl.classList.add('playing');
+                    playBtn.innerHTML = '⏸ Pause';
+                    if (window.showToast) window.showToast(`🎶 Đang phát: ${playlist[currentSongIndex].title}`);
+                    
+                    // Nhạc đã phát thành công, gỡ bỏ các sự kiện lắng nghe để tránh gọi lại
+                    document.removeEventListener('click', tryAutoplay);
+                    document.removeEventListener('touchstart', tryAutoplay);
+                    document.removeEventListener('scroll', tryAutoplay);
+                }).catch(err => {
+                    console.log("Trình duyệt chặn autoplay tự động. Đang chờ tương tác từ người dùng...");
+                });
+            }
+        }
+
+        // 1. Thử phát ngay lập tức khi trang vừa tải xong
+        window.addEventListener('DOMContentLoaded', tryAutoplay);
+
+        // 2. Nếu bị trình duyệt chặn, tự động phát ngay khi người dùng click, chạm hoặc cuộn trang lần đầu
+        document.addEventListener('click', tryAutoplay);
+        document.addEventListener('touchstart', tryAutoplay);
+        document.addEventListener('scroll', tryAutoplay, { once: true });
+        // ==========================================
+        window.togglePlay = function () {
+            if (audioEl.paused) {
+                audioEl.play().then(() => {
+                    isPlaying = true;
+                    playerEl.classList.add('playing');
+                    playBtn.innerHTML = '⏸ Pause';
+                    if (window.showToast) window.showToast(`🎶 Đang phát: ${playlist[currentSongIndex].title}`);
+                }).catch(err => {
+                    console.log("Trình duyệt chặn autoplay:", err);
+                });
+            } else {
+                audioEl.pause();
+                isPlaying = false;
+                playerEl.classList.remove('playing');
+                playBtn.innerHTML = '▶ Play';
+            }
+        };
+
+        window.nextSong = function () {
+            currentSongIndex = (currentSongIndex + 1) % playlist.length;
+            loadSong(currentSongIndex);
+            if (isPlaying) { audioEl.play(); }
+            if (window.showToast) window.showToast(`⏭ Chuyển bài: ${playlist[currentSongIndex].title}`);
+        };
+
+        window.prevSong = function () {
+            currentSongIndex = (currentSongIndex - 1 + playlist.length) % playlist.length;
+            loadSong(currentSongIndex);
+            if (isPlaying) { audioEl.play(); }
+            if (window.showToast) window.showToast(`⏮ Quay lại: ${playlist[currentSongIndex].title}`);
+        };
+
+        // Thu nhỏ/Phóng to cassette
+        window.togglePlayerMinimize = function () {
+            document.getElementById('player-body').classList.toggle('hidden');
+        };
+
+        // Cập nhật thanh tiến trình (Progress bar) khi nhạc chạy
+        audioEl.addEventListener('timeupdate', () => {
+            if (audioEl.duration) {
+                const progressPercent = (audioEl.currentTime / audioEl.duration) * 100;
+                progressBar.style.width = `${progressPercent}%`;
+            }
+        });
+
+        // Tự động nhảy sang bài tiếp theo khi bài hiện tại kết thúc
+        audioEl.addEventListener('ended', window.nextSong);
+
+        // Click vào thanh ngang để tua nhạc
+        window.seekSong = function(e) {
+            const container = document.getElementById('progress-container');
+            const width = container.clientWidth;
+            const clickX = e.offsetX;
+            const duration = audioEl.duration;
+            if(duration) {
+                audioEl.currentTime = (clickX / width) * duration;
+            }
+        };
+        // Tuyết rơi
+        function createSnow() {
+            const container = document.getElementById('snow-container');
+            for (let i = 0; i < 30; i++) {
+                const flake = document.createElement('div');
+                flake.className = 'snowflake';
+                const size = Math.random() * 4 + 2;
+                flake.style.width = `${size}px`;
+                flake.style.height = `${size}px`;
+                flake.style.left = `${Math.random() * 100}vw`;
+                const duration = Math.random() * 6 + 6;
+                const delay = Math.random() * 5;
+                flake.style.animation = `snowfall ${duration}s linear ${delay}s infinite`;
+                container.appendChild(flake);
+            }
+        }
+        createSnow();
+        if (window.matchMedia('(max-width: 767px)').matches) document.getElementById('player-body').classList.add('hidden');
+
+        // ===== Tính năng cây thông mới =====
+        const stage = document.getElementById('tree-stage');
+        // Bóng đèn dọc theo dây đèn & tán lá
+        (function buildBulbs() {
+            const g = document.getElementById('tree-bulbs');
+            const rows = [[60, 3], [100, 5], [140, 6], [180, 7], [220, 8], [260, 9]];
+            let html = '';
+            rows.forEach(([y, n]) => {
+                const half = ((y - 26) / 264) * 118 * 0.85;
+                for (let i = 0; i < n; i++) {
+                    const x = 180 - half + (2 * half) * (n === 1 ? .5 : i / (n - 1)) + (Math.random() * 6 - 3);
+                    const yy = y + Math.sin(i * 1.3) * 6;
+                    html += `<circle class="tree-bulb" cx="${x.toFixed(1)}" cy="${yy.toFixed(1)}" r="2.6" style="animation-delay:${(Math.random() * 1.6).toFixed(2)}s"/>`;
+                }
+            });
+            g.innerHTML = html;
+        })();
+        // Bầu trời sao + tuyết trong khung cây
+        (function buildSky() {
+            const sky = document.getElementById('card-sky');
+            for (let i = 0; i < 40; i++) {
+                const s = document.createElement('span');
+                s.className = 'sky-star';
+                s.style.left = Math.random() * 100 + '%';
+                s.style.top = Math.random() * 45 + '%';
+                s.style.animationDelay = (Math.random() * 3) + 's';
+                sky.appendChild(s);
+            }
+            for (let i = 0; i < 26; i++) {
+                const f = document.createElement('span');
+                f.className = 'card-snow';
+                const size = Math.random() * 3 + 1.5;
+                f.style.width = f.style.height = size + 'px';
+                f.style.left = Math.random() * 100 + '%';
+                f.style.animationDuration = (Math.random() * 6 + 7) + 's';
+                f.style.animationDelay = (-Math.random() * 10) + 's';
+                sky.appendChild(f);
+            }
+        })();
+        // Tooltip tên người gửi khi rê chuột
+        (function setupTips() {
+            const container = document.getElementById('dynamic-ornaments-container');
+            const tip = document.createElement('div');
+            tip.className = 'ornament-tip';
+            stage.appendChild(tip);
+            container.addEventListener('mouseover', e => {
+                const o = e.target.closest('.tree-ornament'); if (!o) return;
+                tip.textContent = '💌 ' + (o.title || '').replace('Lời chúc từ ', '');
+                tip.style.left = `calc(${o.style.left} + 13px)`;
+                tip.style.top = o.style.top;
+                tip.classList.add('show');
+            });
+            container.addEventListener('mouseout', e => {if (e.target.closest('.tree-ornament')) tip.classList.remove('show');});
+        })();
+
+        window.toggleTreeLights = function () {
+            const off = stage.classList.toggle('lights-off');
+            const btn = document.getElementById('btn-lights');
+            btn.classList.toggle('active', !off);
+            btn.querySelector('span').textContent = off ? 'Bật đèn' : 'Tắt đèn';
+        };
+        const THEMES = [['theme-warm', 'Đèn vàng ấm'], ['theme-rainbow', 'Đèn sắc màu'], ['theme-ice', 'Đèn băng tuyết']];
+        let themeIdx = 0;
+        window.cycleLightTheme = function () {
+            stage.classList.remove(THEMES[themeIdx][0]);
+            themeIdx = (themeIdx + 1) % THEMES.length;
+            stage.classList.add(THEMES[themeIdx][0]);
+            document.getElementById('light-theme-label').textContent = THEMES[themeIdx][1];
+        };
+        window.shakeTree = function () {
+            stage.classList.remove('shaking'); void stage.offsetWidth; stage.classList.add('shaking');
+            setTimeout(() => stage.classList.remove('shaking'), 950);
+        };
+        window.openRandomWish = function () {
+            const all = document.querySelectorAll('#dynamic-ornaments-container .tree-ornament');
+            if (!all.length) {window.showToast('Cây chưa có lời chúc nào, hãy là người đầu tiên! ✨'); return;}
+            all[Math.floor(Math.random() * all.length)].click();
+        };
+        window.burstConfetti = function (left, top) {
+            const colors = ['#f7d783', '#c91c36', '#5ca9c0', '#d77b98', '#9dff8a', '#fffaf0'];
+            for (let i = 0; i < 26; i++) {
+                const c = document.createElement('span');
+                c.className = 'confetti-bit';
+                c.style.left = `calc(${left}% + 13px)`; c.style.top = `calc(${top}% + 13px)`;
+                c.style.background = colors[i % colors.length];
+                const a = Math.random() * Math.PI * 2, r = 50 + Math.random() * 80;
+                c.style.setProperty('--dx', Math.cos(a) * r + 'px');
+                c.style.setProperty('--dy', Math.sin(a) * r + 40 + 'px');
+                c.style.setProperty('--rot', (Math.random() * 720 - 360) + 'deg');
+                stage.appendChild(c);
+                setTimeout(() => c.remove(), 1700);
+            }
+        };
+        // Quả châu mẫu: gắn loại để modal hiện đúng biểu tượng
+        document.querySelectorAll('#dynamic-ornaments-container .tree-ornament').forEach(o => {
+            const t = ['red', 'gold', 'blue', 'pink', 'gift'].find(c => o.classList.contains(c));
+            const handler = o.getAttribute('onclick');
+            if (handler && t) o.setAttribute('onclick', handler.replace(/\)\s*$/, `, '${t}')`));
+        }); window.openRealVideoModal = function (embedUrl, title) {
+            document.getElementById('videoModalTitle').textContent = title;
+            // Thay thế nội dung khung modal thành iframe phát video thật
+            const modalContent = document.querySelector('#videoModal .aspect-video');
+            modalContent.innerHTML = `<iframe class="w-full h-full" src="${embedUrl}?autoplay=1" title="${title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+            document.getElementById('videoModal').classList.remove('hidden');
+        };
+
+        // Khi đóng modal, reset lại nội dung để dừng video chạy ngầm
+        const oldCloseVideoModal = window.closeVideoModal;
+        window.closeVideoModal = function () {
+            document.getElementById('videoModal').classList.add('hidden');
+            const modalContent = document.querySelector('#videoModal .aspect-video');
+            modalContent.innerHTML = `<div class="text-center p-6"><span class="text-4xl">▶️</span><p class="text-xs text-stone-400 mt-2">Đang phát video hướng dẫn chi tiết từ SJC Workshop...</p></div>`;
+        };
+    </script>
